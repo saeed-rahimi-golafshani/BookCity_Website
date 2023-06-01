@@ -5,6 +5,8 @@ const http = require("http");
 const { default: mongoose } = require("mongoose");
 const { AllRoutes } = require("./Routers/Router");
 const createHttpError = require("http-errors");
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 module.exports = class Application {
     #app = express();
@@ -28,6 +30,35 @@ module.exports = class Application {
         }
         // File Static 
         this.#app.use(express.static(path.join(__dirname, "..", "Public")));
+        // Swagger Devlopment
+        this.#app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(
+            swaggerJsDoc({
+                swaggerDefinition: {
+                    openapi: "3.0.0",
+                    info : {
+                        title: "BookCity Website",
+                        version: "2.0.0",
+                        description: "وب سایت شهر کتاب، خرید آنلاین کتاب"
+                    },
+                    servers : [{
+                        url : `http://localhost:${this.#PORT}`
+                    }],
+                    components:{
+                        securitySchemes:{
+                            BearerAuth:{
+                                type: "http",
+                                scheme: "bearer",
+                                bearerFormat: "JWT" 
+                            }
+                        }
+                    },
+                    security: [{BearerAuth: []}]
+                },
+                apis: ["./App/Routers/**/*.js"]
+            }), 
+            {explorer: true}
+            )
+        )
     }
     connectedToMongoDb() {
         mongoose.set('strictQuery', 'false')
