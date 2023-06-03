@@ -1,11 +1,12 @@
 const Controller = require("../Controller");
-const { loginWithOtpSchema } = require("../../Validations/AuthSchema");
+const { loginWithOtpSchema, checkLoginSchema } = require("../../Validations/AuthSchema");
 const { randomNumberFiveDigitsGenerator } = require("../../../Utills/Function");
 const { UserModel } = require("../../../Models/User.Model");
 const { ROLES } = require("../../../Utills/Constants");
 const createHttpError = require("http-errors");
 const { StatusCodes: httpStatus } = require("http-status-codes");
 const { smsClient } = require("../../../Utills/Sms.Panel");
+const { signAccessToken } = require("../../../Utills/Token");
 
 class UserAuthentication extends Controller{
     async loginWithOtp(req, res, next){
@@ -57,7 +58,21 @@ class UserAuthentication extends Controller{
     }
     async checkLogin(req, res, next){
         try {
-            
+            const requestBody = await checkLoginSchema.validateAsync(req.body);
+            const { code, mobile } = requestBody;
+            const user = await UserModel.findOne({mobile});
+            if(!user) throw new createHttpError.NotFound("کاربر مورد نظر یافت نشد");
+            if(user.otp.code != code) throw new createHttpError.Unauthorized("کد تایید ارسال شده صحیح نمی باشد");
+            let now = Date.now()
+            if(+user.otp.expiresIn < now ) throw new createHttpError.Unauthorized("کد تایید منقضی شده است");
+            const accessToken = await signAccessToken(user._id);
+            return res.status(httpStatus.OK).json({
+                statusCode: httpStatus.OK,
+                data: {
+                    accessToken
+                }
+            })
+
         } catch (error) {
             next(error)
         }
