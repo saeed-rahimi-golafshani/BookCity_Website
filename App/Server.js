@@ -16,10 +16,11 @@ module.exports = class Application {
         this.#PORT = PORT;
         this.#DB_URL = DB_URL;
         this.configApplication();
+        this.initConfigRedis();
         this.connectedToMongoDb();
-        this.createRoutes();
-        this.errorHandller();
         this.createServer();
+        this.createRoutes();
+        this.errorHandller(); 
     }
     configApplication() {
         this.#app.use(express.json())
@@ -31,7 +32,7 @@ module.exports = class Application {
         // File Static 
         this.#app.use(express.static(path.join(__dirname, "..", "Public")));
         // Swagger Devlopment
-        this.#app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(
+        this.#app.use("/api-doc", swaggerUI.serve, swaggerUI.setup( 
             swaggerJsDoc({
                 swaggerDefinition: {
                     openapi: "3.0.0",
@@ -60,6 +61,9 @@ module.exports = class Application {
             )
         )
     }
+    initConfigRedis(){
+        require("./Utills/Init.Redis")
+    }
     connectedToMongoDb() {
         mongoose.set('strictQuery', 'false')
         mongoose.connect(this.#DB_URL, (error) => {
@@ -69,7 +73,7 @@ module.exports = class Application {
     }
     createServer() {
         http.createServer(this.#app).listen(this.#PORT, () => {
-            console.log(`server running in ${process.env.NODE_ENV} mode on prot ${process.env.BASEURL}:${this.#PORT}`);
+            console.log(`server running in mode on prot ${process.env.BASEURL}:${this.#PORT}`);
         })
     }
     createRoutes() {
