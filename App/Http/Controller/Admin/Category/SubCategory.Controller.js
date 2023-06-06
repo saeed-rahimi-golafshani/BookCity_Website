@@ -27,7 +27,7 @@ class SubCategoryController extends Controller{
     }
     async listOfSubCategory(req, res, next){
         try {
-            const subCategories = await SubCategoryModel.find({parent: undefined}, {children: 0})            
+            const subCategories = await SubCategoryModel.find({parent: undefined}, {createdAt: 0, updatedAt: 0, __v: 0})            
             if(!subCategories) throw new createHttpError.NotFound("زیر مجموعه ای یافت نشد");
             return res.status(httpStatus.OK).json({
                 statusCode: httpStatus.OK,

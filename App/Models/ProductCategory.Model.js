@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose");
 
-const CategorySchema = new mongoose.Schema({
+const ProductCategorySchema = new mongoose.Schema({
     title: {type: String, required: true},
-    parent: {type: mongoose.Types.ObjectId, ref: "category", default: undefined},
+    parent: {type: mongoose.Types.ObjectId, ref: "productcategory", default: undefined},
     sub_category: {type: mongoose.Types.ObjectId, ref: "subcategory", required: true}
 }, {
     timestamps: true,
@@ -12,5 +12,5 @@ const CategorySchema = new mongoose.Schema({
 });
 
 module.exports = {
-    CategoryModel: mongoose.model("category", CategorySchema)
+    ProductCategoryModel: mongoose.model("productcategory", ProductCategorySchema)
 };
