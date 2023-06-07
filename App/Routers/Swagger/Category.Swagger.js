@@ -2,7 +2,7 @@
  * @swagger 
  *  components:
  *      schemas:
- *          Add_SubCategory: 
+ *          Add_Category: 
  *              type: object
  *              required: 
  *                  -   title
@@ -23,9 +23,9 @@
 
 /**
  * @swagger 
- *  /admin/sub_category/create: 
+ *  /admin/category/create: 
  *      post: 
- *          tags: [Admin-SubCategory]
+ *          tags: [Admin-Category]
  *          summary: subcategory in website
  *          description: subcategory is sub to category
  *          requestBody:
@@ -33,10 +33,10 @@
  *              content: 
  *                  application/x-www-form-urlencoded:
  *                      schema: 
- *                          $ref: '#/components/schemas/Add_SubCategory'          
+ *                          $ref: '#/components/schemas/Add_Category'          
  *                  multipart/form-data:
  *                      schema:
- *                          $ref: '#/components/schemas/Add_SubCategory'
+ *                          $ref: '#/components/schemas/Add_Category'
  *          responses: 
  *                  200:
  *                      description: OK
@@ -51,9 +51,9 @@
  */
 /**
 * @swagger
- *  /admin/sub_category/list:
+ *  /admin/category/list:
  *      get: 
- *          tags: [Admin-SubCategory]
+ *          tags: [Admin-Category]
  *          summary: List Of SubCategory  In admin panel
  *          description: List Of SubCategory in admin panel
  *          responses: 
@@ -66,11 +66,11 @@
  */
 /**
 * @swagger
- *  /admin/sub_category/all_list:
+ *  /admin/category/all_list:
  *      get: 
- *          tags: [Admin-SubCategory]
- *          summary: List Of All SubCategory  In admin panel
- *          description: List Of All SubCategory in admin panel
+ *          tags: [Admin-Category]
+ *          summary: List Of All Category  In admin panel
+ *          description: List Of All Category in admin panel
  *          responses: 
  *              200:
  *                  description: OK
@@ -81,9 +81,9 @@
  */
 /**
  * @swagger 
- *  /admin/sub_category/remove/{id}: 
+ *  /admin/category/remove/{id}: 
  *      delete: 
- *          tags: [Admin-SubCategory]
+ *          tags: [Admin-Category]
  *          summary: delete category with Id
  *          description: delete category in admin panel
  *          parameters:
@@ -101,11 +101,11 @@
  */
 /**
  * @swagger 
- *  /admin/sub_category/update/{id}: 
+ *  /admin/category/update/{id}: 
  *      patch: 
- *          tags: [Admin-SubCategory]
- *          summary: update subcategory with Id
- *          description: update subcategory in admin panel
+ *          tags: [Admin-Category]
+ *          summary: update category with Id
+ *          description: update category in admin panel
  *          parameters:
  *              -   in: path
  *                  name: id

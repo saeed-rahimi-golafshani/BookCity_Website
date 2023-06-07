@@ -1,9 +1,7 @@
-const { productCategoryApiRoutes } = require("./ProductCategory.Routes");
-const { SubCategoryApiRoutes } = require("./SubCategory.Routes");
+const { CategoryApiRoutes } = require("./Category.Routes");
 const router = require("express").Router();
 
-router.use("/sub_category", SubCategoryApiRoutes);
-router.use("/product_category", productCategoryApiRoutes);
+router.use("/category", CategoryApiRoutes);
 
 module.exports = {
     AdminApiRoutes: router
