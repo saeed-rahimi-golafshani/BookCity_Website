@@ -4,7 +4,7 @@ const AboutSchema = new mongoose.Schema({
     title: {type: String},
     text: {type: String},
     image: {type: String, default: []},
-    sub_category: {type: mongoose.Types.ObjectId, ref: "subcategory"}
+    category: {type: mongoose.Types.ObjectId, ref: "category"}
 }, {
     timestamps: true
 });

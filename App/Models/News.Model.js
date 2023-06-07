@@ -6,7 +6,7 @@ const NewsSchema = new mongoose.Schema({
     text: {type: String, required: true},
     images: {type: [String], required: true, default: []},
     tags: {type: [String], default: []},
-    sub_category: {type: [mongoose.Types.ObjectId], ref: "subcategory", required: true},
+    category: {type: [mongoose.Types.ObjectId], ref: "subcategory", required: true},
     news_category: {type: [mongoose.Types.ObjectId], ref: "newscategory", required: true},
     source: {type: [String], default: []},
     time: {type: [CommentSchema], default: []}, // زمان حدودی مطالعه
