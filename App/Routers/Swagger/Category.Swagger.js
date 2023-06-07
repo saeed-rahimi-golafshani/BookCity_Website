@@ -65,12 +65,37 @@
  *                              $ref: '#/definitions/PublicDefinition'
  */
 /**
+ * @swagger 
+ *  /admin/category/list/{id}: 
+ *      get: 
+ *          tags: [Admin-Category]
+ *          summary: update category with Id
+ *          description: update category in admin panel
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: string
+ *                  required: true
+ *          responses: 
+ *                  200:
+ *                      description: OK
+ *                      content:
+ *                          application/json:
+ *                              schema:
+ *                                  $ref: '#/definitions/PublicDefinition'       
+ */
+/**
 * @swagger
  *  /admin/category/all_list:
  *      get: 
  *          tags: [Admin-Category]
  *          summary: List Of All Category  In admin panel
  *          description: List Of All Category in admin panel
+ *          parameters: 
+ *              -   in: query
+ *                  name: search
+ *                  type: string
+ *                  description: text for search in title of product
  *          responses: 
  *              200:
  *                  description: OK

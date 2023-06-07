@@ -39,9 +39,35 @@ class CategoryController extends Controller{
             next(error)
         }
     }
+    async listOfCategoryById(req, res, next){
+        try {
+            const { id } = req.params;
+            await this.checkExistCategoryWithId(id);
+            const category = await CategoryModel.findOne({_id: id}, {parent: 0, updatedAt: 0, createdAt: 0, __v: 0})
+            if(!category) throw new createHttpError.NotFound("دسته بندی یافت نشد");
+            return res.status(httpStatus.OK).json({
+                statusCode: httpStatus.OK,
+                data: {
+                    category
+                }
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
     async listOfAllCategory(req, res, next){
         try {
-            const category = await categoryModel.find({});
+            let category;
+            const search = req?.query?.search || "";
+            if(search) {
+                category = await CategoryModel.findOne({
+                    $text: {
+                        $search: new RegExp(search, "ig")
+                    }
+                });
+            } else {
+                category = await CategoryModel.find({});
+            }
             if(!category) throw new createHttpError.NotFound(" دسته بندی یافت نشد")
             return res.status(httpStatus.OK).json({
             statusCode: httpStatus.OK,

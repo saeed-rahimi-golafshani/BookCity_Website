@@ -15,10 +15,13 @@ CategorySchema.virtual("children", {
     foreignField: "parent"
 });
 function autoPopulate(next){
-    this.populate([{path: "children", select: {__v: 0, id: 0}}]);
+    this.populate([
+        {path: "children", select: {__v: 0, id: 0, createdAt: 0, updatedAt: 0}}
+    ]);
     next()
 }
 CategorySchema.pre("findOne", autoPopulate).pre("find", autoPopulate)
+CategorySchema.index({title: "text"});
 
 module.exports = {
     CategoryModel: mongoose.model("category", CategorySchema)
