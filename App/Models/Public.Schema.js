@@ -15,7 +15,7 @@ const CommentSchema = new mongoose.Schema({
     positive_points: {type: [String], default: []}, // نکات مثبت
     comment: {type: String, required: true},
     show: {type: Boolean, required: true, default: false},
-    openToComment: {type: Booleanm, default: true},
+    openToComment: {type: Boolean, default: true},
     likes: {type: mongoose.Types.ObjectId, ref: "user"},
     dislikes: {type: mongoose.Types.ObjectId, ref: "user"},
     score: {type: String}
@@ -27,7 +27,7 @@ const QuestionُSchema = new mongoose.Schema({
     title: {type: String, required: true},
     comment: {type: String, required: true},
     show: {type: Boolean, required: true, default: false},
-    openToComment: {type: Booleanm, default: true},
+    openToComment: {type: Boolean, default: true},
     likes: {type: mongoose.Types.ObjectId, ref: "user"},
     dislikes: {type: mongoose.Types.ObjectId, ref: "user"},
     answers: {type: [AnswerSchema], default: []}

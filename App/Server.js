@@ -20,7 +20,7 @@ module.exports = class Application {
         this.connectedToMongoDb();
         this.createServer();
         this.createRoutes();
-        this.errorHandller(); 
+        this.errorHandler(); 
     }
     configApplication() {
         this.#app.use(express.json())
@@ -79,16 +79,16 @@ module.exports = class Application {
     createRoutes() {
         this.#app.use(AllRoutes)
     }
-    errorHandller() {
-        this.#app.use((req, res, next) => {
-            next(createHttpError.NotFound("آدرس صفحه مورد نظر یافت نشد"));
-        });
+    errorHandler(){
+        this.#app.use((req, res, next) =>{
+            next(createHttpError.NotFound("آدرس صفحه مورد نظر یافت نشد"))
+        })
         this.#app.use((error, req, res, next) => {
-            const serverError = createHttpError.InternalServerError;
-            const statusCode = error?.status || serverError.status;
-            const message = error?.message || serverError.message;
+            const servererror = createHttpError.InternalServerError();
+            const statusCode = error?.status || servererror.status ;
+            const message = error?.message || servererror.message
             return res.status(statusCode).send({
-                error: {
+                errors : {
                     statusCode,
                     message
                 }

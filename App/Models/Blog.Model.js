@@ -1,11 +1,13 @@
 const { default: mongoose } = require("mongoose");
 const { CommentSchema } = require("./Public.Schema");
+const { string } = require("joi");
 
 const BlogSchema = new mongoose.Schema({
     author : {type: mongoose.Types.ObjectId, ref: "user", required: true},
     title: {type: String, required: true},
     short_text: {type: String, required: true},
     text: {type: String, required: true},
+    image_refrence: {type: String, required: true},
     images: {type: [String], required: true, default: []},
     tags: {type: [String], default: []},
     category: {type: [mongoose.Types.ObjectId], ref: "category", required: true},
@@ -21,7 +23,7 @@ const BlogSchema = new mongoose.Schema({
         virtuals: true
     }
 });
-
+BlogSchema.index({title: "text"});
 module.exports = {
     BlogModel: mongoose.model("blog", BlogSchema)
 }
