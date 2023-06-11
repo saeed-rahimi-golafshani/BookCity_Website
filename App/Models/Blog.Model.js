@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const { CommentSchema } = require("./Public.Schema");
+const { CommentSchema } = require("./Comment.Schema");
 const { string } = require("joi");
 
 const BlogSchema = new mongoose.Schema({
