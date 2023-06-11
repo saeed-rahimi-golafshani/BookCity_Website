@@ -2,17 +2,10 @@ const { default: mongoose } = require("mongoose");
 const { CommentSchema } = require("./Comment.Schema");
 const { QuestionُSchema } = require("./Comment.Schema");
 
-// عنوان مشخصات
-const Specs = new mongoose.Schema({
-    title: {type: String, required: true},
-    value: {type: String, required: true}
-});
-
 const PorductSchema = new mongoose.Schema({
     title: {type: String, required: true},
     introduction: {type: String, required: true}, // معرفی محصول
     expert_Check: {type: String}, // بررسی تخصصی 
-    specifications: {type: [Specs], required: true, default: []}, // مشخصات
     images: {type: [String], required: true, default: []},
     image_refrence: {type: String, required: true},
     tags: {type: [String], default: []},
@@ -22,7 +15,7 @@ const PorductSchema = new mongoose.Schema({
     discount: {type: Number, default: 0},
     count: {type: Number},
     description: {type: String},
-    seller: {type: [Seller], default: []}, // فروشنده
+    seller: {type: String, default: []}, // فروشنده
     producer:{type: mongoose.Types.ObjectId, ref: "producer", default: ""}, // تولید کننده
     comments: {type: [CommentSchema], default: []},
     questions: {type: [QuestionُSchema], default: []},

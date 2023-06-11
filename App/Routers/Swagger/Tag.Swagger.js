@@ -7,4 +7,6 @@
  *          description: category section
  *      -   name: Admin-Blog
  *          description: category section
+ *      -   name: Admin-Producer
+ *          description: Producer section
  */

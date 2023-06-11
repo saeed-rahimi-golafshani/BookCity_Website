@@ -61,7 +61,7 @@
  *                      type: file
  *                      description: the tags of blog
  *                  images:
-//  *                      type: array
+ *                      type: array
  *                      items:
  *                          type: string
  *                          format: binary
