@@ -24,11 +24,16 @@ function deleteInvalidPropertyObject(data = {}, balckList = []){
     })
     return data
 }
+function discountOfPrice(main_price, discount){
+    const price = main_price - ((main_price * discount) / 100);
+    return price
+}
 
 
 module.exports = {
     randomNumberFiveDigitsGenerator,
     copyObject,
     listOfImagesFromRequest,
-    deleteInvalidPropertyObject
+    deleteInvalidPropertyObject,
+    discountOfPrice
 }

@@ -9,4 +9,7 @@
  *          description: category section
  *      -   name: Admin-Producer
  *          description: Producer section
+ *      -   name: Admin-Product
+ *          description: Product section
+
  */

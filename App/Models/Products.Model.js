@@ -5,7 +5,7 @@ const { QuestionُSchema } = require("./Comment.Schema");
 const PorductSchema = new mongoose.Schema({
     title: {type: String, required: true},
     introduction: {type: String, required: true}, // معرفی محصول
-    expert_Check: {type: String}, // بررسی تخصصی 
+    expert_Check: {type: String, default: ""}, // بررسی تخصصی 
     images: {type: [String], required: true, default: []},
     image_refrence: {type: String, required: true},
     tags: {type: [String], default: []},
@@ -28,7 +28,7 @@ const PorductSchema = new mongoose.Schema({
         virtuals: true
     }
 });
-
+PorductSchema.index({title: "text"});
 module.exports = {
     ProductModel: mongoose.model("product", PorductSchema)
 }
