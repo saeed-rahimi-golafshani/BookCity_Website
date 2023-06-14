@@ -2,10 +2,18 @@ const createHttpError = require("http-errors");
 const { ProductModel } = require("../../../../Models/Products.Model");
 const { createProductSchema } = require("../../../Validations/Product.Schema");
 const Controller = require("../../Controller");
-const { listOfImagesFromRequest, discountOfPrice } = require("../../../../Utills/Function");
+const { listOfImagesFromRequest, discountOfPrice, copyObject, deleteInvalidPropertyObject } = require("../../../../Utills/Function");
 const path = require("path");
 const { StatusCodes: httpStatus } = require("http-status-codes");
 const { default: mongoose } = require("mongoose");
+const ProductBlackList = {
+    COMMENTS: "comments",
+    QUESTIONS: "questions",
+    LIKES: "likes",
+    DISLIKES: "dislikes",
+    BOOKMARKS: "bookmarks"
+}
+Object.freeze(ProductBlackList);
 
 class ProductController extends Controller{
     async createProduct(req, res, next){
@@ -89,6 +97,45 @@ class ProductController extends Controller{
                     product: resault
                 }
             }) 
+        } catch (error) {
+            next(error)
+        }
+    }
+    async updateProduct(req, res, next){
+        try {
+            const { id } = req.params;
+            const product = await this.checkExistProductById(id);
+            const dataBody = copyObject(req.body);
+            if(dataBody.fileUploadPath && dataBody.filename){
+                dataBody.images = listOfImagesFromRequest(req?.files?.images, dataBody.fileUploadPath);
+                dataBody.image_refrence = path.join(dataBody.fileUploadPath, dataBody.filename).replace(/\\/g, "/");
+            }
+            let blockList = Object.values(ProductBlackList);
+            deleteInvalidPropertyObject(dataBody, blockList);
+            const updateResault = await ProductModel.updateOne({_id: product._id}, {$set: dataBody});
+            if(!updateResault) throw new createHttpError.InternalServerError("خطای سروری");
+            return res.status(httpStatus.OK).json({
+                statusCode: httpStatus.OK,
+                data: {
+                    message: "به روز رسانی با موفقیت انجام شد"
+                }
+            })
+        } catch (error) {
+            next(error)       
+        }
+    }
+    async removeProduct(req, res, next){
+        try {
+            const { id } = req.params;
+            const product = await this.checkExistProductById(id);
+            const deleteResault = await ProductModel.deleteOne({_id: product._id});
+            if(deleteResault.deletedCount == 0) throw new createHttpError.InternalServerError("خطای سروری");
+            return res.status(httpStatus.OK).json({
+                statusCode: httpStatus.OK,
+                data: {
+                    message: "محصول با موفقیت حذف شد"
+                }
+            });
         } catch (error) {
             next(error)
         }

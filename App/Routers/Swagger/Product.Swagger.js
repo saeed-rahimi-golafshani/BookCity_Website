@@ -52,35 +52,49 @@
  *                  producer: 
  *                      type: string
  *                      description: the source of blog
- * 
- *          UpdateBlog:
+ *          UpdateProduct:
  *              type: object
  *              properties: 
  *                  title: 
  *                      type: string
  *                      description: the title of blog
- *                  short_text: 
+ *                  introduction: 
  *                      type: string
  *                      description: the summery of text of blog
- *                  text: 
+ *                  expert_Check: 
  *                      type: string
  *                      description: the text of blog
  *                  category: 
- *                      type: array
+ *                      type: string
  *                      description: the category for fprienkey of blog
  *                  tags: 
  *                      type: array
  *                      description: the tags of blog
- *                  image_refrence: 
+ *                  image_refrence:
  *                      type: file
  *                      description: the tags of blog
- *                  images:
+ *                  images: 
  *                      type: array
  *                      items:
  *                          type: string
  *                          format: binary
- *                  source: 
- *                      type: array
+ *                  main_price: 
+ *                      type: number
+ *                      description: the source of blog
+ *                  discount: 
+ *                      type: number
+ *                      description: the source of blog
+ *                  count: 
+ *                      type: number
+ *                      description: the source of blog
+ *                  description: 
+ *                      type: string
+ *                      description: the source of blog
+ *                  seller: 
+ *                      type: string
+ *                      description: the source of blog
+ *                  producer: 
+ *                      type: string
  *                      description: the source of blog
  */   
 
@@ -143,4 +157,51 @@
  *                          application/json:
  *                              schema:
  *                                  $ref: '#/definitions/ListOfblog'
+ */
+/**
+/**
+ * @swagger 
+ *  /admin/product/update/{id}:
+ *      patch:
+ *          tags: [Admin-Product]
+ *          summary: upadte Product document 
+ *          parameters: 
+ *              -   in: path
+ *                  name: id
+ *                  type: string
+ *                  required: true
+ *          consumer: 
+ *              -   multipart/form-data
+ *          requestBody:
+ *              content:
+ *                  multipart/form-data:
+ *                      schema:         
+ *                          $ref: '#/components/schemas/UpdateProduct'
+ *          responses: 
+ *                  201:
+ *                      description: OK
+ *                      content:
+ *                          application/json:
+ *                              schema:
+ *                                  $ref: '#/definitions/PublicDefinition' 
+ */
+/**
+/**
+ * @swagger 
+ *  /admin/product/delete/{id}:
+ *      delete:
+ *          tags: [Admin-Product]
+ *          summary: delete Product document 
+ *          parameters: 
+ *              -   in: path
+ *                  name: id
+ *                  type: string
+ *                  required: true
+ *          responses: 
+ *                  201:
+ *                      description: OK
+ *                      content:
+ *                          application/json:
+ *                              schema:
+ *                                  $ref: '#/definitions/PublicDefinition' 
  */

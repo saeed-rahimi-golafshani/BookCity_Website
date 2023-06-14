@@ -12,7 +12,7 @@ const blogBlackList = {
     LIKES: "likes",
     DISLIKES: "dislikes",
     BOOKMARKES: "bookmarkes",
-    "VIEW": "view"
+    VIEW: "view"
 }
 Object.freeze(blogBlackList);
 
