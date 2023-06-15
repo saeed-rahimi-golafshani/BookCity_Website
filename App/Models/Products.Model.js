@@ -17,6 +17,7 @@ const PorductSchema = new mongoose.Schema({
     description: {type: String},
     seller: {type: String, default: []}, // فروشنده
     producer:{type: mongoose.Types.ObjectId, ref: "producer", default: ""}, // تولید کننده
+    active: {type: String},
     comments: {type: [CommentSchema], default: []},
     questions: {type: [QuestionُSchema], default: []},
     likes: {type: [mongoose.Types.ObjectId], ref: "user", default: []},
@@ -29,6 +30,22 @@ const PorductSchema = new mongoose.Schema({
     }
 });
 PorductSchema.index({title: "text"});
+PorductSchema.virtual("attribute", {
+    ref: "product_category_attribute",
+    localField: "_id",
+    foreignField: "product"
+}, {
+        ref: "product_category_attribute",
+        localField: "_id",
+        foreignField: "category_attribute"
+});
+
+function autoPopulate(next){
+    this.populate([{path: "attribute", select: {__v: 0, id: 0, updatedAt: 0, createdAt: 0}}
+]);
+    next()
+}
+PorductSchema.pre("findOne", autoPopulate).pre("find", autoPopulate)
 module.exports = {
     ProductModel: mongoose.model("product", PorductSchema)
 }

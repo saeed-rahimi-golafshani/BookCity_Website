@@ -14,6 +14,7 @@ const createProductSchema = joi.object({
     main_price: joi.number().error(createHttpError.BadRequest(" ساختار قیمت اصلی وارد شده صحیح نمیباشد")),
     discount: joi.number().error(createHttpError.BadRequest(" ساختار تخفیف وارد شده صحیح نمیباشد")),
     count: joi.number().error(createHttpError.BadRequest("ساختار تعداد محصول اشتباه است")),
+    active: joi.string().error(createHttpError.BadRequest("ساختار فعال بودن یا نبودن محصول اشتباه است")),
     filename: joi.string().pattern(FILENMAE_IMAGE_PATTERN).error(createHttpError.BadRequest("ساختار فرمت تصویر ارسالی اشتباه است")),
     fileUploadPath: joi.allow()
 });

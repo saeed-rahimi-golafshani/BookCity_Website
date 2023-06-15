@@ -19,9 +19,8 @@ class ProductController extends Controller{
     async createProduct(req, res, next){
         try {
             const requestBody = await createProductSchema.validateAsync(req.body);
-            const {title, introduction, expert_Check, tags, category, seller, description, producer, main_price, discount, count} = requestBody;
+            const {title, introduction, expert_Check, tags, category, seller, description, producer, main_price, discount, count, active} = requestBody;
             await this.checkExistProductByTitle(title);
-            
             const images = listOfImagesFromRequest(req?.files?.images || [], req.body.fileUploadPath);
             const image_refrence = path.join(requestBody.fileUploadPath, requestBody.filename).replace(/\\/g,"/");
             const price = discountOfPrice(main_price, discount);
@@ -39,7 +38,8 @@ class ProductController extends Controller{
                 discount,
                 count,
                 images,
-                image_refrence
+                image_refrence,
+                active
             });
             if(!product) throw new createHttpError.InternalServerError("خطای سروری");
             return res.status(httpStatus.CREATED).json({
@@ -57,18 +57,15 @@ class ProductController extends Controller{
             let products;
             const { search } = req.query;
             if(search){
-                products = await ProductModel.find({
-                    $text: {
-                        $search: new RegExp(search, "ig")
-                    }
-                }).populate([
+                products = await ProductModel.find({$text: {$search: search}}).populate([
                     {path: "category", select: {title: 1}},
                     {path: "producer", select: {title: 1, description: 1}}
                 ])
             }else{
                 products = await ProductModel.find({}).populate([
                     {path: "category", select: {title: 1}},
-                    {path: "producer", select: {title: 1, description: 1}}
+                    {path: "producer", select: {title: 1, description: 1}},
+                    
                 ])
             }
             if(!products) throw new createHttpError.NotFound("محصولی یافت نشد")

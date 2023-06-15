@@ -11,5 +11,8 @@
  *          description: Producer section
  *      -   name: Admin-Product
  *          description: Product section
-
+ *      -   name: Admin-CategoryAttribute
+ *          description: CategoryAttribute section
+ *      -   name: Admin-ProductCategoryAttribute
+ *          description: ProductCategoryAttribute section
  */

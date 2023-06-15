@@ -1,4 +1,14 @@
 /**
+ * @swagger
+ *  components: 
+ *      schemas:
+ *          Active:
+ *              type: string
+ *              enum:
+ *                  -   active
+ *                  -   unactive
+ */
+/**
  * @swagger 
  *  components:
  *      schemas: 
@@ -52,6 +62,8 @@
  *                  producer: 
  *                      type: string
  *                      description: the source of blog
+ *                  active:      
+ *                      $ref: '#/components/schemas/Active'
  *          UpdateProduct:
  *              type: object
  *              properties: 
