@@ -5,6 +5,8 @@
  *          description: User-auth section
  *      -   name: Admin-Category
  *          description: category section
+ *      -   name: Admin-News
+ *          description: News section
  *      -   name: Admin-Blog
  *          description: category section
  *      -   name: Admin-Producer

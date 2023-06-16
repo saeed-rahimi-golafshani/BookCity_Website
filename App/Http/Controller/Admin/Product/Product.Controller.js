@@ -52,7 +52,7 @@ class ProductController extends Controller{
             next(error)
         }
     }
-    async listOfProduct(req, res, next){
+    async listOfProduct(req, res, next){ 
         try {
             let products;
             const { search } = req.query;

@@ -153,7 +153,7 @@
  *              -   in: query
  *                  name: search
  *                  type: string
- *                  description: text for search in title of product
+ *                  description: text for search in title of blog
  *          responses: 
  *                  201:
  *                      description: success

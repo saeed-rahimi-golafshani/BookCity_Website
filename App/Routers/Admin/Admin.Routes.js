@@ -1,6 +1,7 @@
 const { AdminApiBlogRoutes } = require("./Blog.Routes");
 const { CategoryApiRoutes } = require("./Category.Routes");
 const { CategoryAttributeApiRoutes } = require("./CategoryAttribute.Routes");
+const { NewsApiRoutes } = require("./News.Routes");
 const { ProducerApiRoutes } = require("./Producer.Routes");
 const { ProductApiRoutes } = require("./Product.Routes");
 const { ProductCatAttributeApiRoutes } = require("./ProductCatAttribute.Routes");
@@ -12,6 +13,7 @@ router.use("/producer", ProducerApiRoutes);
 router.use("/product", ProductApiRoutes);
 router.use("/category_Attribute", CategoryAttributeApiRoutes);
 router.use("/product_category_attribute", ProductCatAttributeApiRoutes);
+router.use("/news", NewsApiRoutes)
 
 module.exports = {
     AdminApiRoutes: router
