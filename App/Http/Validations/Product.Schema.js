@@ -4,6 +4,7 @@ const { MONGOID_PATTERN, FILENMAE_IMAGE_PATTERN } = require("../../Utills/Consta
 
 const createProductSchema = joi.object({
     title: joi.string().min(3).max(50).error(createHttpError.BadRequest("ساختار عنوان محصول اشتباه است")),
+    en_title: joi.string().min(3).max(50).error(createHttpError.BadRequest(" ساختار عنوان انگلیسی محصول اشتباه است")),
     introduction: joi.string().error(createHttpError.BadRequest("ساختار معرفی محصول اشتباه است")),
     expert_Check: joi.string().error(createHttpError.BadRequest("ساختار معرفی محصول اشتباه است")),
     tags: joi.array().min(0).max(10).error(createHttpError.BadRequest("ساختار تگ یا برچسب اشتباه است")),

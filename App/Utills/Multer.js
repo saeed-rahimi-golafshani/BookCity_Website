@@ -48,7 +48,7 @@ const uploadFile = (folderName) => {
       limits: { fileSize: 10000000 },
       fileFilter: function (req, file, cb) {
         const ext = path.extname(file.originalname);
-        const mimetypes = [".jpeg", ".jpg", ".png", ".webp", ".gif", ".jfif"];
+        const mimetypes = [".jpeg", ".jpg", ".png", ".webp", ".gif", ".jfif", ".avif", ".svg", ".ico"];
         if(mimetypes.includes(ext)){
         return cb(null, true)
      } 

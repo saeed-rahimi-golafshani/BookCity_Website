@@ -19,13 +19,14 @@ class ProductController extends Controller{
     async createProduct(req, res, next){
         try {
             const requestBody = await createProductSchema.validateAsync(req.body);
-            const {title, introduction, expert_Check, tags, category, seller, description, producer, main_price, discount, count, active} = requestBody;
+            const {title, en_title, introduction, expert_Check, tags, category, seller, description, producer, main_price, discount, count, active} = requestBody;
             await this.checkExistProductByTitle(title);
             const images = listOfImagesFromRequest(req?.files?.images || [], req.body.fileUploadPath);
             const image_refrence = path.join(requestBody.fileUploadPath, requestBody.filename).replace(/\\/g,"/");
             const price = discountOfPrice(main_price, discount);
             const product = await ProductModel.create({
                 title,
+                en_title,
                 introduction,
                 expert_Check,
                 tags,

@@ -1,7 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
 const UserAddress = new mongoose.Schema({
-    country: {type: String, required: true},
     state: {type: String, required: true},
     city: {type: String, required: true},
     addrees: {type: String, required: true},

@@ -24,6 +24,9 @@
  *                  title: 
  *                      type: string
  *                      description: the title of blog
+ *                  en_title: 
+ *                      type: string
+ *                      description: the en_title of blog
  *                  introduction: 
  *                      type: string
  *                      description: the summery of text of blog
@@ -70,6 +73,9 @@
  *                  title: 
  *                      type: string
  *                      description: the title of blog
+ *                  en_title: 
+ *                      type: string
+ *                      description: the en_title of blog
  *                  introduction: 
  *                      type: string
  *                      description: the summery of text of blog

@@ -3,6 +3,12 @@
  *  tags: 
  *      -   name: User-Authentication
  *          description: User-auth section
+ *      -   name: Admin-Contact
+ *          description: Contact section
+ *      -   name: Admin-CategoryNavbar
+ *          description: CategoryNavbar section
+ *      -   name: Admin-CategorySidebar
+ *          description: CategorySidebar section
  *      -   name: Admin-Category
  *          description: category section
  *      -   name: Admin-News

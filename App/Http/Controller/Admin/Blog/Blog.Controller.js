@@ -25,8 +25,6 @@ class BlogController extends Controller{
             const images = listOfImagesFromRequest(req.files.images || [], requestBody.fileUploadPath)
             req.body.image_refrence = path.join(requestBody.fileUploadPath, requestBody.filename).replace(/\\/g, "/");
             const image_refrence = req.body.image_refrence;
-            console.log(req.files);
-            console.log(req.query);
             const author = req.user._id;
             const blog = await BlogModel.create({
                 title,

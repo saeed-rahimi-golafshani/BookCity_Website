@@ -4,6 +4,7 @@ const { QuestionُSchema } = require("./Comment.Schema");
 
 const PorductSchema = new mongoose.Schema({
     title: {type: String, required: true},
+    en_title: {type: String},
     introduction: {type: String, required: true}, // معرفی محصول
     expert_Check: {type: String, default: ""}, // بررسی تخصصی 
     images: {type: [String], required: true, default: []},
