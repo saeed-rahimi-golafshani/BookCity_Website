@@ -8,11 +8,13 @@ const { NewsApiRoutes } = require("./News.Routes");
 const { ProducerApiRoutes } = require("./Producer.Routes");
 const { ProductApiRoutes } = require("./Product.Routes");
 const { ProductCatAttributeApiRoutes } = require("./ProductCatAttribute.Routes");
+const { SubcategoryApiRoutes } = require("./SubCategory.Routes");
 const router = require("express").Router();
 
 router.use("/category_sidebar", CategorySilebarApiRoutes)
 router.use("/category_navbar", CategoryNavbarApiRoutes); 
 router.use("/category", CategoryApiRoutes);
+router.use("/subcategory", SubcategoryApiRoutes);
 router.use("/blog", AdminApiBlogRoutes);
 router.use("/producer", ProducerApiRoutes);
 router.use("/product", ProductApiRoutes);

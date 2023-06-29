@@ -11,13 +11,14 @@ const PorductSchema = new mongoose.Schema({
     image_refrence: {type: String, required: true},
     tags: {type: [String], default: []},
     category: {type: mongoose.Types.ObjectId, ref: "category", required: true},
+    subcategory: {type: mongoose.Types.ObjectId, ref: "subcategory"},
     main_price: {type: Number, default: 0},
     price: {type: Number, default: 0},
     discount: {type: Number, default: 0},
     count: {type: Number},
     description: {type: String},
     seller: {type: String, default: []}, // فروشنده
-    producer:{type: mongoose.Types.ObjectId, ref: "producer", default: ""}, // تولید کننده
+    producer:{type: mongoose.Types.ObjectId, ref: "producer", default: ""}, // تولید کننده یا انتشارات
     active: {type: String},
     comments: {type: [CommentSchema], default: []},
     questions: {type: [QuestionُSchema], default: []},

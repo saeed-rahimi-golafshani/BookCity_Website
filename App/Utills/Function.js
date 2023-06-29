@@ -1,3 +1,6 @@
+const { realpath } = require("fs");
+const createHttpError = require("http-errors");
+const { default: mongoose } = require("mongoose");
 const path = require("path");
 
 function randomNumberFiveDigitsGenerator(){
@@ -12,7 +15,7 @@ function listOfImagesFromRequest(files, fileUploadPath){
     } else {
         return []
     }
-}
+};
 function deleteInvalidPropertyObject(data = {}, balckList = []){
     const nullishData = ["", " ", 0, NaN, null, undefined];
     Object.keys(data).forEach(key => {
@@ -23,17 +26,30 @@ function deleteInvalidPropertyObject(data = {}, balckList = []){
         if(Array.isArray(data[key]) && data[key].length == 0) delete data[key];
     })
     return data
-}
+};
 function discountOfPrice(main_price, discount){
     const price = main_price - ((main_price * discount) / 100);
     return price
-}
-
+};
+async function checkExistOfModelById(id, modelSchema){
+    if(!mongoose.isValidObjectId(id)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر یافت نشد");
+    const model = await modelSchema.findById(id);
+    if(!model) throw new createHttpError.NotFound("گزینه مورد نظر یافت نشد");
+    return model
+};
+function deleteFileInPath(fileAddress){
+    if(fileAddress){
+     const pathFile = path.join(__dirname, "..", "..", "Public", fileAddress);
+     if(fs.existsSync(pathFile)) fs.unlinkSync(pathFile);
+    }
+};
 
 module.exports = {
     randomNumberFiveDigitsGenerator,
     copyObject,
     listOfImagesFromRequest,
     deleteInvalidPropertyObject,
-    discountOfPrice
+    discountOfPrice,
+    checkExistOfModelById,
+    deleteFileInPath
 }

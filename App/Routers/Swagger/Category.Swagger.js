@@ -9,10 +9,13 @@
  *              properties: 
  *                  title: 
  *                      type: string
- *                      description: the title of subCategory 
+ *                      description: the title of Category 
+ *                  category_sidebar: 
+ *                      type: string
+ *                      description: the category_sidebar of Category 
  *                  parent: 
  *                      type: string
- *                      description: the parent of sub category
+ *                      description: the parent of category
  *          UpdateCategory: 
  *              type: object
  *              properties: 
@@ -26,7 +29,7 @@
  *  /admin/category/create: 
  *      post: 
  *          tags: [Admin-Category]
- *          summary: subcategory in website
+ *          summary: category in website
  *          description: subcategory is sub to category
  *          requestBody:
  *              required: true

@@ -2,8 +2,9 @@ const { default: mongoose } = require("mongoose");
 
 const CategorySchema = new mongoose.Schema({
     title: {type: String, required: true},
-    parent: {type: mongoose.Types.ObjectId, ref: "category", default: undefined},
-    category_sidebar: {type: mongoose.Types.ObjectId, required: true, ref: "categorysidbar"}
+    category_sidebar: {type: mongoose.Types.ObjectId, ref: "categorysidbar"},
+    
+    parent: {type: mongoose.Types.ObjectId, ref: "category", default: undefined}
 }, {
     timestamps: true,
     toJSON: {

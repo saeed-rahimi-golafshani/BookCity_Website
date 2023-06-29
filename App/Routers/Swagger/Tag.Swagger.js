@@ -11,6 +11,8 @@
  *          description: CategorySidebar section
  *      -   name: Admin-Category
  *          description: category section
+ *      -   name: Admin-SubCategory
+ *          description: category section
  *      -   name: Admin-News
  *          description: News section
  *      -   name: Admin-Blog

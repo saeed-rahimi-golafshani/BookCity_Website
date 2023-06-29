@@ -10,6 +10,7 @@ const router = require("express").Router();
     ProductController.createProduct);
     router.get("/list", ProductController.listOfProduct);
     router.get("/list/:id", ProductController.listOfProductById);
+    router.get("/list_of_producer/:producerId", ProductController.listOfProductByProducer);
     router.patch("/update/:id", 
     uploadFile("Product").fields([{name: "images", maxCount: 10}, {name: "image_refrence", maxCount: 1}]), 
     stringToArray("tags"),

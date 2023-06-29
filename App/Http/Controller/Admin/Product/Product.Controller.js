@@ -2,10 +2,11 @@ const createHttpError = require("http-errors");
 const { ProductModel } = require("../../../../Models/Products.Model");
 const { createProductSchema } = require("../../../Validations/Product.Schema");
 const Controller = require("../../Controller");
-const { listOfImagesFromRequest, discountOfPrice, copyObject, deleteInvalidPropertyObject } = require("../../../../Utills/Function");
+const { listOfImagesFromRequest, discountOfPrice, copyObject, deleteInvalidPropertyObject, checkExistOfModelById } = require("../../../../Utills/Function");
 const path = require("path");
 const { StatusCodes: httpStatus } = require("http-status-codes");
 const { default: mongoose } = require("mongoose");
+const { ProducerModel } = require("../../../../Models/Producer.Model");
 const ProductBlackList = {
     COMMENTS: "comments",
     QUESTIONS: "questions",
@@ -19,7 +20,7 @@ class ProductController extends Controller{
     async createProduct(req, res, next){
         try {
             const requestBody = await createProductSchema.validateAsync(req.body);
-            const {title, en_title, introduction, expert_Check, tags, category, seller, description, producer, main_price, discount, count, active} = requestBody;
+            const {title, en_title, introduction, expert_Check, tags, category, subcategory, seller, description, producer, main_price, discount, count, active} = requestBody;
             await this.checkExistProductByTitle(title);
             const images = listOfImagesFromRequest(req?.files?.images || [], req.body.fileUploadPath);
             const image_refrence = path.join(requestBody.fileUploadPath, requestBody.filename).replace(/\\/g,"/");
@@ -31,6 +32,7 @@ class ProductController extends Controller{
                 expert_Check,
                 tags,
                 category,
+                subcategory,
                 seller,
                 description,
                 producer,
@@ -60,11 +62,13 @@ class ProductController extends Controller{
             if(search){
                 products = await ProductModel.find({$text: {$search: search}}).populate([
                     {path: "category", select: {title: 1}},
+                    {path: "subcategory", select: {title: 1}},
                     {path: "producer", select: {title: 1, description: 1}}
                 ])
             }else{
                 products = await ProductModel.find({}).populate([
                     {path: "category", select: {title: 1}},
+                    {path: "subcategory", select: {title: 1}},
                     {path: "producer", select: {title: 1, description: 1}},
                     
                 ])
@@ -86,6 +90,7 @@ class ProductController extends Controller{
             await this.checkExistProductById(id);
             const resault = await ProductModel.findOne({_id: id}).populate([
                 {path: "category", select: {title: 1}},
+                {path: "subcategory", select: {title: 1}},
                 {path: "producer", select: {title: 1, description: 1}}
             ]);
             if(!resault) throw new createHttpError.NotFound("محصولی یافت نشد");
@@ -95,6 +100,22 @@ class ProductController extends Controller{
                     product: resault
                 }
             }) 
+        } catch (error) {
+            next(error)
+        }
+    }
+    async listOfProductByProducer(req, res, next){
+        try {
+            const { producerId } = req.params;
+            const checkProducer = await checkExistOfModelById(producerId, ProducerModel);
+            const list = await ProductModel.find({producer: checkProducer._id});
+            if(!list) throw new createHttpError.NotFound("محصولی با مشخصات تولید کننده یافت نشد");
+            return res.status(httpStatus.OK).json({
+                statusCode: httpStatus.OK,
+                data: {
+                    list
+                }
+            });
         } catch (error) {
             next(error)
         }

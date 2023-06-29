@@ -1,7 +1,7 @@
 /**
  * @swagger
  *  definitions:
- *      ListOfCategorySidebar:
+ *      ListOfSubCategory:
  *          type: object
  *          properties:
  *              statusCode:     
@@ -20,54 +20,53 @@
  *                                      example: "6403548e530901e984e7de91"
  *                                  title:
  *                                      type: string
- *                                      example: "title of CategoryNavbar"
- *                                  category_navbar: 
+ *                                      example: "title of SubCategory"
+ *                                  category: 
  *                                      type: string
  *                                      example: "6403548e530901e984e7de91"
- *                                  icon:
+ *                                  image:
  *                                      type: string
- *                                      example: "icon of CategoryNavbar"                  
- */
-/**
- * @swagger 
- *  components:
- *      schemas: 
- *          createCategorySidebar:
- *              type: object
- *              required: 
- *                  -   title
- *                  -   category_navbar
- *                  -   icon
- *              properties: 
- *                  title: 
- *                      type: string
- *                      description: the title of CategorySidebar
- *                  category_navbar: 
- *                      type: string
- *                      description: the title of CategorySidebar
- *                  icon: 
- *                      type: file
- *                      description: the summery of text of CategorySidebar
- *          UpdateCategorySidebar:
- *              type: object
- *              properties: 
- *                  title: 
- *                      type: string
- *                      description: the title of CategorySidebar
- *                  category_navbar: 
- *                      type: string
- *                      description: the title of CategorySidebar
- *                  icon: 
- *                      type: file
- *                      description: the summery of text of CategorySidebar
+ *                                      example: "image of CategoryNavbar"                  
  */
 
 /**
  * @swagger 
- *  /admin/category_sidebar/create:
+ *  components:
+ *      schemas: 
+ *          createSubCategory:
+ *              type: object
+ *              required: 
+ *                  -   title
+ *              properties: 
+ *                  title: 
+ *                      type: string
+ *                      description: the title of SubCategory
+ *                  category: 
+ *                      type: string
+ *                      description: the category of SubCategory
+ *                  image: 
+ *                      type: file
+ *                      description: the summery of text of SubCategory
+ *          UpdateSubcategory:
+ *              type: object
+ *              properties: 
+ *                  title: 
+ *                      type: string
+ *                      description: the title of SubCategory
+ *                  category: 
+ *                      type: string
+ *                      description: the category of SubCategory
+ *                  image: 
+ *                      type: file
+ *                      description: the summery of text of SubCategory
+ */
+
+/**
+ * @swagger 
+ *  /admin/subcategory/create:
  *      post:
- *          tags: [Admin-CategorySidebar]
- *          summary: create CategorySidebar document 
+ *          tags: [Admin-SubCategory]
+ *          summary: create CategoryNavbar document 
  *          consumer: 
  *              -   multipart/form-data
  *          requestBody: 
@@ -75,7 +74,7 @@
  *              content:
  *                  multipart/form-data:
  *                      schema:         
- *                          $ref: '#/components/schemas/createCategorySidebar'
+ *                          $ref: '#/components/schemas/createSubCategory'
  *          responses: 
  *                  201:
  *                      description: CREATED
@@ -86,29 +85,27 @@
  */
 
 /**
-/**
-* @swagger
- *  /admin/category_sidebar/list:
- *      get: 
- *          tags: [Admin-CategorySidebar]
- *          summary: List Of CategorySidebar  In admin panel
- *          description: List Of CategorySidebar in admin panel
+ * @swagger 
+ *  /admin/subcategory/list:
+ *      get:
+ *          tags: [Admin-SubCategory]
+ *          summary: create CategoryNavbar document 
  *          responses: 
- *              200:
- *                  description: OK
- *                  content:
- *                      application/json:
- *                          schema:
- *                              $ref: '#/definitions/ListOfCategorySidebar'
+ *                  201:
+ *                      description: CREATED
+ *                      content:
+ *                          application/json:
+ *                              schema:
+ *                                  $ref: '#/definitions/PublicDefinition' 
  */
 
 /**
  * @swagger 
- *  /admin/category_sidebar/list/{id}: 
+ *  /admin/subcategory/list/{id}: 
  *      get: 
- *          tags: [Admin-CategorySidebar]
- *          summary: update category_sidebar with Id
- *          description: update category_sidebar in admin panel
+ *          tags: [Admin-SubCategory]
+ *          summary: update SubCategory with Id
+ *          description: update SubCategory in admin panel
  *          parameters:
  *              -   in: path
  *                  name: id
@@ -120,16 +117,16 @@
  *                      content:
  *                          application/json:
  *                              schema:
- *                                  $ref: '#/definitions/ListOfCategorySidebar'       
+ *                                  $ref: '#/definitions/ListOfSubCategory'       
  */
 
 /**
  * @swagger 
- *  /admin/category_sidebar/delete/{id}: 
+ *  /admin/subcategory/delete/{id}: 
  *      delete: 
- *          tags: [Admin-CategorySidebar]
- *          summary: delete CategorySidebar with Id
- *          description: delete CategorySidebar in admin panel
+ *          tags: [Admin-SubCategory]
+ *          summary: delete SubCategory with Id
+ *          description: delete SubCategory in admin panel
  *          parameters:
  *              -   in: path
  *                  name: id
@@ -146,11 +143,11 @@
 
 /**
  * @swagger 
- *  /admin/category_sidebar/update/{id}: 
+ *  /admin/subcategory/update/{id}: 
  *      patch: 
- *          tags: [Admin-CategorySidebar]
- *          summary: update CategorySidebar with Id
- *          description: update CategorySidebar in admin panel
+ *          tags: [Admin-SubCategory]
+ *          summary: update SubCategory with Id
+ *          description: update SubCategory in admin panel
  *          parameters:
  *              -   in: path
  *                  name: id
@@ -160,7 +157,7 @@
  *              content: 
  *                  multipart/form-data:
  *                      schema:
- *                          $ref: '#/components/schemas/UpdateCategorySidebar'
+ *                          $ref: '#/components/schemas/UpdateSubcategory'
  *          responses: 
  *                  200:
  *                      description: OK

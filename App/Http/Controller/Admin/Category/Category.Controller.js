@@ -10,14 +10,14 @@ class CategoryController extends Controller{
     async createCategory(req, res, next){
         try {
             const requestBody = await createCategorySchema.validateAsync(req.body);
-            const { title, parent } = requestBody;
+            const { title, parent, category_sidebar } = requestBody;
             await this.checkExistCategoryWithTitle(title);
-            const category = await CategoryModel.create({title, parent});
+            const category = await CategoryModel.create({title, parent, category_sidebar});
             if(!category) throw new createHttpError.InternalServerError("خطای سروری");
             return res.status(httpStatus.CREATED).json({
                 statusCode: httpStatus.CREATED,
                 data: {
-                    message: "زیر مجموعه با موفقیت ثبت شد"
+                    message: " دسته بندی با موفقیت ثبت شد"
                 }
             })
 
@@ -27,7 +27,9 @@ class CategoryController extends Controller{
     }
     async listOfCategory(req, res, next){
         try {
-            const categories = await CategoryModel.find({parent: undefined}, {createdAt: 0, updatedAt: 0, __v: 0})            
+            const categories = await CategoryModel.find({parent: undefined}, {createdAt: 0, updatedAt: 0, __v: 0}).populate([
+                {path: "category_sidebar", select: {title: 1}},
+            ])            
             if(!categories) throw new createHttpError.NotFound("دسته بندی یافت نشد");
             return res.status(httpStatus.OK).json({
                 statusCode: httpStatus.OK,

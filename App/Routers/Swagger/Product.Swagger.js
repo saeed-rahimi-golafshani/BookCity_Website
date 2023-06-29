@@ -23,25 +23,28 @@
  *              properties: 
  *                  title: 
  *                      type: string
- *                      description: the title of blog
+ *                      description: the title of Product
  *                  en_title: 
  *                      type: string
- *                      description: the en_title of blog
+ *                      description: the en_title of Product
  *                  introduction: 
  *                      type: string
- *                      description: the summery of text of blog
+ *                      description: the summery of text of Product
  *                  expert_Check: 
  *                      type: string
- *                      description: the text of blog
+ *                      description: the text of Product
  *                  category: 
  *                      type: string
- *                      description: the category for fprienkey of blog
+ *                      description: the category for fprienkey of Product
+ *                  subcategory: 
+ *                      type: string
+ *                      description: the subcategory for fprienkey of Product
  *                  tags: 
  *                      type: array
- *                      description: the tags of blog
+ *                      description: the tags of Product
  *                  image_refrence:
  *                      type: file
- *                      description: the tags of blog
+ *                      description: the tags of Product
  *                  images: 
  *                      type: array
  *                      items:
@@ -49,22 +52,22 @@
  *                          format: binary
  *                  main_price: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  discount: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  count: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  description: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of blProductg
  *                  seller: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  producer: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  active:      
  *                      $ref: '#/components/schemas/Active'
  *          UpdateProduct:
@@ -72,25 +75,28 @@
  *              properties: 
  *                  title: 
  *                      type: string
- *                      description: the title of blog
+ *                      description: the title of Product
  *                  en_title: 
  *                      type: string
- *                      description: the en_title of blog
+ *                      description: the en_title of Product
  *                  introduction: 
  *                      type: string
- *                      description: the summery of text of blog
+ *                      description: the summery of text of Product
  *                  expert_Check: 
  *                      type: string
- *                      description: the text of blog
+ *                      description: the text of Product
  *                  category: 
  *                      type: string
- *                      description: the category for fprienkey of blog
+ *                      description: the category for prienkey of Product
+ *                  subcategory: 
+ *                      type: string
+ *                      description: the subcategory for prienkey of Product
  *                  tags: 
  *                      type: array
- *                      description: the tags of blog
+ *                      description: the tags of Product
  *                  image_refrence:
  *                      type: file
- *                      description: the tags of blog
+ *                      description: the tags of Product
  *                  images: 
  *                      type: array
  *                      items:
@@ -98,22 +104,22 @@
  *                          format: binary
  *                  main_price: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  discount: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  count: 
  *                      type: number
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  description: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  seller: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of Product
  *                  producer: 
  *                      type: string
- *                      description: the source of blog
+ *                      description: the source of Product
  */   
 
 /**
@@ -176,7 +182,27 @@
  *                              schema:
  *                                  $ref: '#/definitions/ListOfblog'
  */
+
 /**
+ * @swagger 
+ *  /admin/product/list_of_producer/{producerId}:
+ *      get: 
+ *          tags: [Admin-Product]
+ *          summary: get listof Product with Id
+ *          parameters: 
+ *              -   in: path
+ *                  name: producerId
+ *                  type: string
+ *                  required: true
+ *          responses: 
+ *                  201:
+ *                      description: success
+ *                      content:
+ *                          application/json:
+ *                              schema:
+ *                                  $ref: '#/definitions/ListOfblog'
+ */
+
 /**
  * @swagger 
  *  /admin/product/update/{id}:
@@ -203,7 +229,7 @@
  *                              schema:
  *                                  $ref: '#/definitions/PublicDefinition' 
  */
-/**
+
 /**
  * @swagger 
  *  /admin/product/delete/{id}:

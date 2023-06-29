@@ -9,6 +9,7 @@ const createProductSchema = joi.object({
     expert_Check: joi.string().error(createHttpError.BadRequest("ساختار معرفی محصول اشتباه است")),
     tags: joi.array().min(0).max(10).error(createHttpError.BadRequest("ساختار تگ یا برچسب اشتباه است")),
     category: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار دسته بندی محصول اشتباه است")),
+    subcategory: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار زیرمجموعه دسته بندی محصول اشتباه است")),
     seller: joi.string().error(createHttpError.BadRequest("ساختار فروشنده محصول اشتباه است")),
     description: joi.string().error(createHttpError.BadRequest("ساختار توضیحات محصول اشتباه است")),
     producer: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار تولید کننده محصول اشتباه است")),

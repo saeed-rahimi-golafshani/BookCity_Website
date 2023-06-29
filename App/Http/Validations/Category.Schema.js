@@ -1,9 +1,10 @@
 const createHttpError = require("http-errors");
 const joi = require("joi");
-const { MONGOID_PATTERN, FILENMAE_ICON_PATTERN } = require("../../Utills/Constants")
+const { MONGOID_PATTERN, FILENMAE_ICON_PATTERN, FILENMAE_IMAGE_PATTERN } = require("../../Utills/Constants")
 
 const createCategorySchema = joi.object({
     title: joi.string().min(3).max(50).error(createHttpError.BadRequest("ساختار عنوان زیر مجموعه اشتباه است")),
+    category_sidebar: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار گزینه مورد نظر اشتباه است ")),
     parent: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار گزینه مورد نظر اشتباه است"))
 });
 const createCategoryNavbarSchema = joi.object({
@@ -16,9 +17,16 @@ const createCategorySidebarSchema = joi.object({
     category_navbar: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار گزینه مورد نظر اشتباه است ")),
     filename: joi.string().pattern(FILENMAE_ICON_PATTERN).error(createHttpError.BadRequest("ساختار فرمت آیکون مورد نظر اشتباه است")),
     fileUploadPath: joi.allow()
+});
+const createSubCategorySchema = joi.object({
+    title: joi.string().min(3).max(50).error(createHttpError.BadRequest("ساختار عنوان زیر مجموعه اشتباه است")),
+    category: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار گزینه مورد نظر اشتباه است ")),
+    filename: joi.string().pattern(FILENMAE_IMAGE_PATTERN).error(createHttpError.BadRequest("ساختار فرمت آیکون مورد نظر اشتباه است")),
+    fileUploadPath: joi.allow()
 })
 module.exports = {
     createCategorySchema,
     createCategoryNavbarSchema,
-    createCategorySidebarSchema
+    createCategorySidebarSchema,
+    createSubCategorySchema
 }
