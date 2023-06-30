@@ -8,7 +8,7 @@ const NewsSchema = new mongoose.Schema({
     image_refrence: {type: String, required: true},
     images: {type: [String], required: true, default: []},
     tags: {type: [String], default: []},
-    category: {type: [mongoose.Types.ObjectId], ref: "category", required: true},
+    newscategory: {type: [mongoose.Types.ObjectId], ref: "newscategory", required: true},
     source: {type: [String], default: []},
     time_range: {type: String, required: true, default: "0:0:0"},
     comment: {type: [CommentSchema], default: []},

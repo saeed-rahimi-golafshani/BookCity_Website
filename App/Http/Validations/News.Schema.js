@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 const joi = require("joi");
-const { FILENMAE_IMAGE_PATTERN } = require("../../Utills/Constants");
+const { FILENMAE_IMAGE_PATTERN, MONGOID_PATTERN } = require("../../Utills/Constants");
 
 const createNewsSchema = joi.object({
     title: joi.string().min(3).error(createHttpError.BadRequest("ساختار عنوان خبر اشتباه است")),
@@ -13,7 +13,12 @@ const createNewsSchema = joi.object({
     filename: joi.string().pattern(FILENMAE_IMAGE_PATTERN).error(createHttpError.BadRequest("ساختار فرمت تصویر ارسالی اشتباه است")),
     fileUploadPath: joi.allow()
 });
+const createNewsCategorySchema = joi.object({
+    title: joi.string().min(3).max(30).error(createHttpError.BadRequest("ساختار عنوان دسته بندی خبر اشتباه است")),
+    category_navbar: joi.string().pattern(MONGOID_PATTERN).error(createHttpError.BadRequest("ساختار دسته بندی اشتباه است"))
+});
 
 module.exports = {
-    createNewsSchema
+    createNewsSchema,
+    createNewsCategorySchema
 }

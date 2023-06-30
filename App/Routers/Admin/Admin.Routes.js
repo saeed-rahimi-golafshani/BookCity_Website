@@ -5,6 +5,7 @@ const { CategoryNavbarApiRoutes } = require("./CategoryNavbar.Routes");
 const { CategorySilebarApiRoutes } = require("./CategorySidebar.Routes");
 const { contactApiRoutes } = require("./Contact.Routes");
 const { NewsApiRoutes } = require("./News.Routes");
+const { NewsCategoryApiRoutes } = require("./NewsCategory.Routes");
 const { ProducerApiRoutes } = require("./Producer.Routes");
 const { ProductApiRoutes } = require("./Product.Routes");
 const { ProductCatAttributeApiRoutes } = require("./ProductCatAttribute.Routes");
@@ -20,6 +21,7 @@ router.use("/producer", ProducerApiRoutes);
 router.use("/product", ProductApiRoutes);
 router.use("/category_Attribute", CategoryAttributeApiRoutes);
 router.use("/product_category_attribute", ProductCatAttributeApiRoutes);
+router.use("/newscategory", NewsCategoryApiRoutes);
 router.use("/news", NewsApiRoutes);
 router.use("/contact", contactApiRoutes);
 

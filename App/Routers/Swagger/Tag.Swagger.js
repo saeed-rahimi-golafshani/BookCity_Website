@@ -13,6 +13,8 @@
  *          description: category section
  *      -   name: Admin-SubCategory
  *          description: category section
+ *      -   name: Admin-NewsCategory
+ *          description: NewsCategory section
  *      -   name: Admin-News
  *          description: News section
  *      -   name: Admin-Blog
