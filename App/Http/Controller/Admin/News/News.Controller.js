@@ -19,7 +19,7 @@ class NewsController extends Controller{
     async createNews(req, res, next){
         try {
             const requestBody = await createNewsSchema.validateAsync(req.body);
-            const {title, short_text, text, tags, category, source, time_range} = requestBody;
+            const {title, short_text, text, tags, newscategory, source, time_range} = requestBody;
             await this.checkExistNewsByTitle(title);
             req.body.image_refrence = path.join(requestBody.fileUploadPath, requestBody.filename).replace(/\\/g, "/");
             const image_refrence = req.body.image_refrence;
@@ -29,7 +29,7 @@ class NewsController extends Controller{
                 short_text,
                 text,
                 tags,
-                category,
+                newscategory,
                 source,
                 time_range,
                 image_refrence,
@@ -52,11 +52,11 @@ class NewsController extends Controller{
             const { search } = req.query;
             if(search){
                 news = await NewsModel.find({$text: {$search: search}}).populate([
-                    {path: "category"}
+                    {path: "newscategory"}
                 ]);
             }else {
                 news = await NewsModel.find({}).populate([
-                    {path: "category", select: {title: 1}}
+                    {path: "newscategory", select: {title: 1}}
                 ]);
             }
             if(!news) throw new createHttpError.NotFound("خبری یافت نشد");
@@ -91,7 +91,7 @@ class NewsController extends Controller{
         try {
             const { catId } = req.params;
             const news = await NewsModel.find({category: catId}).populate([
-                {path: "category", select: {title: 1}}
+                {path: "newscategory", select: {title: 1}}
             ]);
             if(!news) throw new createHttpError.NotFound("خبری یافت نشد");
             return res.status(httpStatus.OK).json({

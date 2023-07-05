@@ -64,7 +64,7 @@
  *                  -   text
  *                  -   images
  *                  -   image_refrence
- *                  -   category
+ *                  -   newscategory
  *                  -   time_range
  *              properties: 
  *                  title: 
@@ -76,7 +76,7 @@
  *                  text: 
  *                      type: string
  *                      description: the text of News
- *                  category: 
+ *                  newscategory: 
  *                      type: array
  *                      description: the category for fprienkey of News
  *                  tags: 
@@ -108,7 +108,7 @@
  *                  text: 
  *                      type: string
  *                      description: the text of News
- *                  category: 
+ *                  newscategory: 
  *                      type: array
  *                      description: the category for fprienkey of News
  *                  tags: 

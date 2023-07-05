@@ -59,7 +59,8 @@ class BlogController extends Controller{
                         $search: new RegExp(search, "ig")
                     }
                 }).populate([
-                    {path: "category"}
+                    {path: "category"},
+                    {path: "author", select: {firstname: 1, lastname: 1}}
                 ])
             } else {
                 blogs = await BlogModel.find({}).populate([
