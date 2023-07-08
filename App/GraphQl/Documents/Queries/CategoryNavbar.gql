@@ -1,0 +1,9 @@
+{
+  listOfCategoryNavbar{
+    _id
+    title
+    icon
+    iconUrl
+    
+  }
+}

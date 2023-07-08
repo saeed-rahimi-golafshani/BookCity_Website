@@ -1,5 +1,5 @@
 const createHttpError = require("http-errors");
-const { CategoryNavbarModel } = require("../../../../Models/Category_Navbar.model");
+const { CategoryNavbarModel } = require("../../../../Models/Category_Navbar.Model");
 const { createCategoryNavbarSchema } = require("../../../Validations/Category.Schema");
 const Controller = require("../../Controller");
 const path = require("path");
@@ -64,7 +64,7 @@ class CategoryNavbarController extends Controller{
             const databody = copyObject(req.body);
             if(databody.fileUploadPath && databody.filename){
                 databody.icon = path.join(databody.fileUploadPath, databody.filename).replace(/\\/g, "/");
-                deleteFileInPath(checkId.icon)
+                // deleteFileInPath(checkId.icon)
             }
             const nullishData = ["", " ", null, NaN, undefined, 0];
             Object.keys(databody).forEach(key => {

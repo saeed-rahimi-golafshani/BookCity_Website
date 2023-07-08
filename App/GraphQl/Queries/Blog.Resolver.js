@@ -1,4 +1,4 @@
-const { GraphQLList } = require("graphql");
+const { GraphQLList, GraphQLString } = require("graphql");
 const { BlogType } = require("../TypeDefs/Blog.Type");
 const { BlogModel } = require("../../Models/Blog.Model")
 
@@ -11,7 +11,25 @@ const BlogResolver = {
         return listOfblog
     } 
 }
+const ListOfBlogById = {
+    type: new GraphQLList(BlogType),
+    args: {
+        id: {type: GraphQLString}
+    },
+    resolve: async(_, args) => {
+        const { id } = args;
+        const resault = await BlogModel.find({_id: id}).populate([
+            {path: "author"},
+            {path: "category"}
+        ])
+        return resault
+    }
+}
+const listofBlogByCategory = {
+    
+}
 
 module.exports = {
-    BlogResolver
+    BlogResolver,
+    ListOfBlogById
 }

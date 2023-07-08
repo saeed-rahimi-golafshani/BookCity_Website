@@ -8,16 +8,7 @@ const UserType = new GraphQLObjectType({
         lastname: {type: GraphQLString}
     }
 });
-const CategoryNavbarType = new GraphQLObjectType({
-    name: "CategoryNavbarType",
-    fields: {
-        _id: {type: GraphQLString},
-        title: {type: GraphQLString},
-        icon: {type: GraphQLString}
-    }
-});
 
 module.exports = {
-    UserType,
-    CategoryNavbarType
+    UserType
 }

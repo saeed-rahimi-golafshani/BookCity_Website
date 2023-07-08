@@ -26,7 +26,7 @@ const BlogSchema = new mongoose.Schema({
 BlogSchema.index({title: "text"});
 
 BlogSchema.virtual("imageURL").get(function(){
-    return `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${this.images}`
+    return this.images.map(image => `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${image}`)
 });
 BlogSchema.virtual("imagerefrenceurl").get(function(){
     return `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${this.image_refrence}`

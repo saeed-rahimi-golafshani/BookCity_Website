@@ -1,6 +1,7 @@
 const { GraphQLObjectType, GraphQLString, GraphQLList } = require("graphql");
-const { UserType, CategoryNavbarType } = require("./Public.Type");
+const { UserType } = require("./Public.Type");
 const { CommentType } = require("./Comment.Type");
+const { CategoryNavbarType } = require("./CategoryNavbar.Type");
 
 const BlogType = new GraphQLObjectType({
     name: "BlogType",

@@ -1,5 +1,112 @@
+# blogs
 {
-    blogs{
-        
+  blogs{
+    _id
+    author{
+      _id
+      firstname
+      lastname
     }
+    title
+    short_text
+	text
+	image_refrence
+	images
+	imageURL
+	imagerefrenceurl
+	tags
+	category{
+      _id
+      title
+    }
+	source
+	comments {
+		_id
+		title
+		comment
+		show
+		openToComment
+		createdAt
+		score
+	}
+	likes {
+		_id
+		firstname
+		lastname
+	}
+	dislikes {
+		_id
+		firstname
+		lastname
+	}
+	bookmarks {
+		_id
+		firstname
+		lastname
+	}
+	view {
+		_id
+		firstname
+		lastname
+	}
+    
+  }
+}
+
+# listOfBlogById
+{
+  listOfBlogById(id: "64a8329e5dfd217d60f0bbb1"){
+    _id
+		author{
+      _id
+      firstname
+      lastname
+    }
+		title
+		short_text
+		text
+		image_refrence
+		images
+		imageURL
+		imagerefrenceurl
+		tags
+		category{
+    	_id 
+			title
+			icon
+			iconUrl
+    }
+		source
+		comments{
+      _id
+			title
+			comment
+			show
+			openToComment
+			createdAt
+			score
+    }
+		likes{
+      _id
+      firstname
+      lastname
+    }
+		dislikes{
+      _id
+      firstname
+      lastname
+    }
+		bookmarks{
+      _id
+      firstname
+      lastname
+    }
+		view{
+      _id
+      firstname
+      lastname
+    }
+    
+    
+  }
 }

@@ -10,6 +10,10 @@ const CategoryNavbarSchema = new mongoose.Schema({
     }
 });
 
+CategoryNavbarSchema.virtual("iconUrl").get(function(){
+    return `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${this.icon}`
+});
+
 module.exports = {
     CategoryNavbarModel: mongoose.model("categorynavbar", CategoryNavbarSchema)
 }
