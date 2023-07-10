@@ -1,3 +1,4 @@
+# listOfCategoryNavbar
 {
   listOfCategoryNavbar{
     _id
@@ -5,5 +6,15 @@
     icon
     iconUrl
     
+  }
+}
+
+# listOfCategoryNavbarById
+{
+  listOfcategoryNavbarById(id: "6494b86c311f4a9a2e741fce"){
+    _id   
+    title
+		icon
+		iconUrl
   }
 }

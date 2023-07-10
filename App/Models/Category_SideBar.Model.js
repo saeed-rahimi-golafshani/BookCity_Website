@@ -10,6 +10,9 @@ const CategorySidebarSchema = new mongoose.Schema({
         virtuals: true
     }
 });
+CategorySidebarSchema.virtual("iconUrl").get(function(){
+    return `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${this.icon}`
+});
 
 module.exports = {
     CategorySidebarModel: mongoose.model("categorysidbar", CategorySidebarSchema)

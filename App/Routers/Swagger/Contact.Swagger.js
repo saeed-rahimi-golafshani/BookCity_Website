@@ -4,6 +4,11 @@
  *      schemas: 
  *         createContact:
  *              type: object
+ *              required: 
+ *                  -   phone
+ *                  -   email
+ *                  -   address
+ *                  -   fax
  *              properties: 
  *                  phone: 
  *                      type: string
@@ -43,6 +48,7 @@
  *          consumer: 
  *              -   multipart/form-data
  *          requestBody: 
+ *              required: true
  *              content:
  *                  multipart/form-data:
  *                      schema:         

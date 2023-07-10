@@ -25,11 +25,22 @@ const ListOfBlogById = {
         return resault
     }
 }
-const listofBlogByCategory = {
-    
+const ListofBlogByCategory = {
+    type: new GraphQLList(BlogType),
+    args: {
+        categoryId: {type: GraphQLString}
+    },
+    resolve: async(_, args) => {
+        const { categoryId } = args;
+        const blog = await BlogModel.find({category: categoryId}).populate([
+            {path: "category"}
+        ]);
+        return blog
+    }
 }
 
 module.exports = {
     BlogResolver,
-    ListOfBlogById
+    ListOfBlogById,
+    ListofBlogByCategory
 }

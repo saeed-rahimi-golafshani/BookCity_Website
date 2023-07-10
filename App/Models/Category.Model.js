@@ -3,7 +3,6 @@ const { default: mongoose } = require("mongoose");
 const CategorySchema = new mongoose.Schema({
     title: {type: String, required: true},
     category_sidebar: {type: mongoose.Types.ObjectId, ref: "categorysidbar"},
-    
     parent: {type: mongoose.Types.ObjectId, ref: "category", default: undefined}
 }, {
     timestamps: true,

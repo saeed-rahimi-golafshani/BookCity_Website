@@ -1,0 +1,32 @@
+# listOfCategorySidebar
+{
+  listOfCategorySidebar{
+    _id   
+    title
+		icon
+		iconUrl
+    category_navbar
+  }
+}
+
+# listOfCategoryById
+{
+  listOfCategorySidebarById(id: "6494c1fb7e04a2eacb44e77d"){
+    _id   
+    title
+		icon
+		iconUrl
+    category_navbar
+  }
+}
+
+# listOfCategoryByCatnav
+{
+  listOfcategorySidebarByCatNav(catenav: "6494b86c311f4a9a2e741fce"){
+    _id  
+    title
+    icon
+    iconUrl
+	category_navbar
+  }
+}

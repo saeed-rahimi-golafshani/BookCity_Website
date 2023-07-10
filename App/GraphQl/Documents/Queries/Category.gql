@@ -1,0 +1,38 @@
+# category 
+{
+  listOfCategory{
+    _id  
+    title
+    category_sidebar{
+      _id
+      title
+    }
+    children
+  }
+}
+
+# listOfCategoryById 
+{
+  listofCategoryById(id:"64953df21b845b8af8e10b7d"){
+    _id  
+    title
+    category_sidebar{
+      _id
+      title
+    }
+    children
+  }
+}
+
+# listOfCategoryByCatSidebar
+{
+  listOfCategoryBySidebar(catSidebar:"6494c1de7e04a2eacb44e77a"){
+    _id  
+    title
+    category_sidebar{
+      _id
+      title
+    }
+    children
+  }
+}
