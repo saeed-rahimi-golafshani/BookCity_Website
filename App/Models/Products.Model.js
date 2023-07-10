@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const { CommentSchema } = require("./Comment.Schema");
-const { QuestionُSchema } = require("./Comment.Schema");
+const { QuestionُSchema } = require("./Question.Model");
 
 const PorductSchema = new mongoose.Schema({
     title: {type: String, required: true},
@@ -30,6 +30,12 @@ const PorductSchema = new mongoose.Schema({
     toJSON: {
         virtuals: true
     }
+});
+PorductSchema.virtual("imagesUrl").get(function() {
+   return this.images.map(image => `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${image}`)
+});
+PorductSchema.virtual("image_refrenceUrl").get(function() {
+    return `${process.env.BASEURL}:${process.env.APPLICATION_PORT}/${this.image_refrence}`
 });
 PorductSchema.index({title: "text"});
 PorductSchema.virtual("attribute", {

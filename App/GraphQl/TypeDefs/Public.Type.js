@@ -15,8 +15,16 @@ const AnyType = new GraphQLScalarType({
     serialize: toObject,
     parseLiteral: parseLiteral
 });
+const ProducerType = new GraphQLObjectType({
+    name: "producerType",
+    fields: {
+        title: {type: GraphQLString},
+        description: {type: GraphQLString}
+    }
+})
 
 module.exports = {
     UserType,
-    AnyType
+    AnyType,
+    ProducerType
 }
