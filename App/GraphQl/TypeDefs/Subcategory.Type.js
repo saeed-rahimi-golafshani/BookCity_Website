@@ -4,7 +4,8 @@ const { CategoryType } = require("./Category.Type");
 const SubCategoryType = new GraphQLObjectType({
     name: "subcategoryType",
     fields: {
-        title: {type: GraphQLString}
+        _id: {type: GraphQLString},
+        title: {type: GraphQLString},
         category: {type: CategoryType},
         image: {type: GraphQLString},
         imageUrl: {type: GraphQLString}

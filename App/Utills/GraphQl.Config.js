@@ -4,7 +4,7 @@ function graphQlConfig(req, res){
     return {
         schema: GraphQlSchema,
         graphiql: true,
-        context: {req, res}
+        context: {req, res},
     }
 }
 
