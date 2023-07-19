@@ -26,7 +26,9 @@ class CategoryAttributeController extends Controller{
     }
     async listOfCategoryAttribute(req, res, next){
         try {
-            const categoryAttributeis = await CategoryAttributeModel.find({});
+            const categoryAttributeis = await CategoryAttributeModel.find({}).populate([
+                {path: "category"}
+            ]);
             if(!categoryAttributeis) throw new createHttpError.NotFound("ویژگی محصولی یافت نشد");
             return res.status(httpStatus.OK).json({
                 statusCode: httpStatus.OK,

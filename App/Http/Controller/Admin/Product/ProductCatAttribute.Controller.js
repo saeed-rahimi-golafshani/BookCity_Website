@@ -24,9 +24,60 @@ class ProductCatAttributeController extends Controller{
     }
     async listOfProductCatAttribute(req, res, next){
         try {
-            const productCatAttributes = await productCategoryAttributeModel.find({}).populate([
-                {path: "product", select: {title: 1}},
-                {path: "category_attribute", select: {label: 1}}
+            const productCatAttributes = await productCategoryAttributeModel.aggregate([
+                {$match: {}},
+                {
+                    $lookup: {
+                        from: "products",
+                        localField: "product",
+                        foreignField: "_id",
+                        as: "product"
+                    }
+                }, 
+                {
+                    $unwind: "$product"
+                },
+                {
+                    $lookup: {
+                        from: "category_attributes",
+                        localField: "category_attribute",
+                        foreignField: "_id",
+                        as: "category_attribute"
+                    }
+                },
+                {
+                    $unwind: "$category_attribute"
+                },
+                {
+                    $project: {
+                        "product.__v": 0,
+                        "product.introduction": 0,
+                        "product.expert_Check": 0,
+                        "product.images": 0,
+                        "product.image_refrence": 0,
+                        "product.tags": 0,
+                        "product.category": 0,
+                        "product.main_price": 0,
+                        "product.price": 0,
+                        "product.discount": 0,
+                        "product.count": 0,
+                        "product.description": 0,
+                        "product.seller": 0,
+                        "product.producer": 0,
+                        "product.active": 0,
+                        "product.likes": 0,
+                        "product.dislikes": 0,
+                        "product.bookmarks": 0,
+                        "product.comments": 0,
+                        "product.questions": 0,
+                        "product.createdAt": 0,
+                        "product.updatedAt": 0,
+                        "category_attribute.category": 0,
+                        "category_attribute.createdAt": 0,
+                        "category_attribute.updatedAt": 0,
+                        "category_attribute.__v": 0,
+                    }
+                }
             ]);
             if(!productCatAttributes) throw new createHttpError.NotFound("مشخصات محصولی یافت نشد");
             return res.status(httpStatus.OK).json({

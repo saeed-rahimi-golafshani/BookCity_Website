@@ -1,0 +1,22 @@
+# ListOfCategoryAttribute
+{
+  listOfCategoryAttribute{
+    _id
+    category{
+      _id
+      title
+    }
+    label
+  }
+}
+# ListOfCategoryAttributeByCategoryId
+{
+  listOfCategoryAttributeByCategoryId(catId: "64954d312c2413c126fccfd2"){
+    _id
+    category{
+      _id
+      title
+    }
+    label
+  }
+}
