@@ -6,6 +6,7 @@ const { ListOfCategory, ListofCategoryById, ListOfCategoryBySidebar } = require(
 const { ListOfContact } = require("./Queries/Contact.Resolver");
 const { ListOfProduct, ListOfProductById, ListOfProductByCategory, ListOfProductBySubcategory } = require("./Queries/Product.Resolver");
 const { listOfCategoryAttribute, listOfCategoryAttributeByCategoryId } = require("./Queries/CategoryAttribute.Resolver");
+const { ListOfProductCategoryAttribute, ListOfProductCategoryAttributeByProId } = require("./Queries/ProductCategoryAttribute.Resolver");
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
@@ -34,7 +35,10 @@ const RootQuery = new GraphQLObjectType({
         listOfProductBySubcategory: ListOfProductBySubcategory,
         //CategoryAttribute
         listOfCategoryAttribute: listOfCategoryAttribute,
-        listOfCategoryAttributeByCategoryId: listOfCategoryAttributeByCategoryId
+        listOfCategoryAttributeByCategoryId: listOfCategoryAttributeByCategoryId,
+        // ProductCategoryAttribute
+        listOfProductCategoryAttribute: ListOfProductCategoryAttribute,
+        listOfProductCategoryAttributeByProId: ListOfProductCategoryAttributeByProId
     }
 });
 const RootMutation = new GraphQLObjectType({

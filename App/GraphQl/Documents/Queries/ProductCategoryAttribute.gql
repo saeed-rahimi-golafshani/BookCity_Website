@@ -1,0 +1,30 @@
+# listOfProductCategoryAttribute 
+{
+  listOfProductCategoryAttribute{
+    _id
+    product{
+      _id
+      title
+    }
+    category_attribute{
+      _id
+      label
+    }
+    value
+	}
+}
+# listOfProductCategoryAttributeByProId
+{
+  listOfProductCategoryAttributeByProId(proId: "648a0ad8bff486e0b8b22e5a") {
+    _id
+    product {
+      _id
+      title
+    }
+    category_attribute {
+      _id
+      label
+    }
+    value
+  }
+}
