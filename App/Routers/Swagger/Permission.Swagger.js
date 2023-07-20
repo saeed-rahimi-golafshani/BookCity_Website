@@ -56,6 +56,7 @@
 *                              schema:
 *                                  $ref: '#/definitions/PublicDefinition' 
 */
+
 /**
  * @swagger 
  *  /admin/permission/update/{id}:
@@ -84,7 +85,7 @@
  * @swagger
  *  /admin/permission/remove/{id}:
  *      delete:
- *          tags: [Admin_Permission]
+ *          tags: [Admin-Permission]
  *          summary: remove the Permission
  *          parameters:
  *              -   in: path

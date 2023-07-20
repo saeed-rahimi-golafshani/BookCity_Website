@@ -15,5 +15,13 @@ module.exports = {
     MULTRE_FILENAME: Object.freeze({
         BLOGS: "BLOGS",
         PRODUCTS: "PRODUCTS"
-    })
+    }),
+    PERMISSIONS: Object.freeze(
+        {
+            USER: ["profile"],
+            SUPERADMIN: ["all"],
+            ADMIN: ["blogs", "category", "produt"],
+            ALL: "all"
+        }
+    ),
 }

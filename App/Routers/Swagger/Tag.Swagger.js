@@ -29,4 +29,6 @@
  *          description: ProductCategoryAttribute section
  *      -   name: Admin-Permission
  *          description: Permission section
+ *      -   name: Admin-Role
+ *          description: Permission section
  */
