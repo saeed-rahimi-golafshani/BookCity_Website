@@ -9,6 +9,7 @@ const { listOfCategoryAttribute, listOfCategoryAttributeByCategoryId } = require
 const { ListOfProductCategoryAttribute, ListOfProductCategoryAttributeByProId } = require("./Queries/ProductCategoryAttribute.Resolver");
 const { CreateCommentForBlog, CreateCommentForNews, CreateCommentForProduct } = require("./Mutations/Comment.Resolver");
 const { LikeBlog, likeNews, likeProduct, LikeCommentOfBlog, LikeCommentOfNews, LikeCommentOfProduct } = require("./Mutations/Likes.Resolver");
+const { DislikeOfNews, DislikesOfBlog, DislikesOfProduct, DislikesCommentsOfblog, DislikesCommentsOfNews, DislikesCommentsOfProduct } = require("./Mutations/Dislikes.Resolver")
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
@@ -56,7 +57,14 @@ const RootMutation = new GraphQLObjectType({
         likeProduct,
         LikeCommentOfBlog,
         LikeCommentOfNews,
-        LikeCommentOfProduct
+        LikeCommentOfProduct,
+        // Dislikes 
+        DislikesOfBlog, 
+        DislikeOfNews,
+        DislikesOfProduct,
+        DislikesCommentsOfblog,
+        DislikesCommentsOfNews,
+        DislikesCommentsOfProduct
     }
 });
 const GraphQlSchema = new GraphQLSchema({
