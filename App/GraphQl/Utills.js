@@ -65,11 +65,32 @@ async function checkExistProduct(proId){
     if(!product) throw new createHttpError.NotFound("محصول مورد نظر یافت نشد");
     return product;
 };
+async function checkExistCommentOfBlog(commentId){
+    if(!mongoose.isValidObjectId(commentId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const comment = await BlogModel.findOne({"comments._id": commentId});
+    if(!comment) throw new createHttpError.NotFound("در این مقاله کامنتی یافت نشد");
+    return comment
+};
+async function checkExistCommentOfNews(commentId){
+    if(!mongoose.isValidObjectId(commentId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const comment = await NewsModel.findOne({"comment._id": commentId});
+    if(!comment) throw new createHttpError.NotFound("در این خبر کامنتی یافت نشد");
+    return comment
+};
+async function checkExistCommentOfProduct(commentId){
+    if(!mongoose.isValidObjectId(commentId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const comment = await ProductModel.findOne({"comment._id": commentId});
+    if(!comment) throw new createHttpError.NotFound("در این محصول کامنتی یافت نشد");
+    return comment
+}
 
 module.exports = {
     parseLiteral,
     toObject,
     checkExistBlog,
     checkExistNews,
-    checkExistProduct
+    checkExistProduct,
+    checkExistCommentOfBlog,
+    checkExistCommentOfNews,
+    checkExistCommentOfProduct
 }
