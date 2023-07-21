@@ -8,7 +8,7 @@ const router = require("express").Router();
     uploadFile("News").fields([{name: "images", maxCount: 10}, {name: "image_refrence", maxCount: 1}]), 
     stringToArray("tags"), 
     stringToArray("source"),
-    stringToArray("category"),
+    stringToArray("newscategory"),
     NewsController.createNews);
     router.get("/list", NewsController.listOfNews);
     router.get("/list/:id", NewsController.listOfNewsById);
@@ -17,7 +17,7 @@ const router = require("express").Router();
     uploadFile("News").fields([{name: "images", maxCount: 10}, {name: "image_refrence", maxCount: 1}]), 
     stringToArray("tags"), 
     stringToArray("source"),
-    stringToArray("category"),
+    stringToArray("newscategory"),
     NewsController.updateNews);
     router.delete("/delete/:id", NewsController.deleteNews);
     

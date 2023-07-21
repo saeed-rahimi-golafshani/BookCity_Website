@@ -3,10 +3,11 @@ const { ResponseType } = require("../TypeDefs/Public.Type");
 const { verifyAccessTokenInGraphQL } = require("../../Http/Middleware/verifyAccessToken");
 const { default: mongoose } = require("mongoose");
 const createHttpError = require("http-errors");
-const { checkExistBlog, checkExistNews } = require("../Utills");
+const { checkExistBlog, checkExistNews, checkExistProduct } = require("../Utills");
 const { BlogModel } = require("../../Models/Blog.Model");
 const { StatusCodes: httpStatus } = require("http-status-codes");
 const { NewsModel } = require("../../Models/News.Model");
+const { ProductModel } = require("../../Models/Products.Model");
 
 const CreateCommentForBlog = {
     type: ResponseType,
@@ -74,8 +75,42 @@ const CreateCommentForNews = {
         }
     }
 };
+const CreateCommentForProduct = {
+    type: ResponseType,
+    args: {
+        comment: {type: GraphQLString},
+        productId: {type: GraphQLString},
+        title: {type: GraphQLString},
+        negative_points: {type: new GraphQLList(GraphQLString)},
+        positive_points: {type: new GraphQLList(GraphQLString)}
+    },
+    resolve: async(_, args, context) => {
+        const { req } = context;
+        const user = await verifyAccessTokenInGraphQL(req);
+        const { comment, productId, title, negative_points, positive_points } = args;
+        if(!mongoose.isValidObjectId(productId)) throw new createHttpError.BadRequest("ساختار شناسه محصول اشتباه است");
+        await checkExistProduct(productId);
+        await ProductModel.updateOne({_id: productId}, {
+            $push: {comments: {
+                user: user._id,
+                comment,
+                title,
+                show: false,
+                positive_points,
+                negative_points
+            }}
+        });
+        return {
+            statusCode: httpStatus.CREATED,
+            data: {
+                message: "ثبت نظر با موفقیت انجام شد، بعد از تایید مدیر سایت نظر شما ثبت خواهد شد"
+            }
+        }
+    }
+}
 
 module.exports = {
     CreateCommentForBlog,
-    CreateCommentForNews
+    CreateCommentForNews,
+    CreateCommentForProduct
 }

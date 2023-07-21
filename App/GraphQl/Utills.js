@@ -1,7 +1,8 @@
 const createHttpError = require("http-errors");
 const { default: mongoose } = require("mongoose");
 const { BlogModel } = require("../Models/Blog.Model");
-const { NewsModel } = require("../Models/News.Model")
+const { NewsModel } = require("../Models/News.Model");
+const { ProductModel } = require("../Models/Products.Model")
 
 function parseObject(valueNode) {
     const value = Object.create(null);
@@ -57,11 +58,18 @@ async function checkExistNews(newsid){
     const news = await NewsModel.findById(newsid);
     if(!news) throw new createHttpError.NotFound("خبر مورد نظر یافت نشد");
     return news
-}
+};
+async function checkExistProduct(proId){
+    if(!mongoose.isValidObjectId(proId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const product = await ProductModel.findById(proId);
+    if(!product) throw new createHttpError.NotFound("محصول مورد نظر یافت نشد");
+    return product;
+};
 
 module.exports = {
     parseLiteral,
     toObject,
     checkExistBlog,
-    checkExistNews
+    checkExistNews,
+    checkExistProduct
 }
