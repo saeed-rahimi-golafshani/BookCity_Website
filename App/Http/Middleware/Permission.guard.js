@@ -11,7 +11,6 @@ function checkPermission(requiredPermission = []){
             const user = req.user;
             const role = await RoleModel.findOne({title: user.roles});
             const permissions = await PermissionModel.find({_id: {$in: role.permissions}})
-            console.log(permissions);
             const userPermissions = permissions.map(item => item.name);
             const hasPermission = allPermissions.every(permission => {
                 return userPermissions.includes(permission)
