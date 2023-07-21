@@ -16,20 +16,20 @@ const { RoleApiRoutes } = require("./Role.Routers");
 const { SubcategoryApiRoutes } = require("./SubCategory.Routes");
 const router = require("express").Router();
 
-router.use("/category_sidebar", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), CategorySilebarApiRoutes)
-router.use("/category_navbar", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), CategoryNavbarApiRoutes); 
-router.use("/category", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), CategoryApiRoutes);
-router.use("/subcategory", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), SubcategoryApiRoutes);
-router.use("/blog", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), AdminApiBlogRoutes);
-router.use("/producer", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), ProducerApiRoutes);
-router.use("/product", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), ProductApiRoutes);
-router.use("/category_Attribute", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), CategoryAttributeApiRoutes);
-router.use("/product_category_attribute", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), ProductCatAttributeApiRoutes);
-router.use("/newscategory", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), NewsCategoryApiRoutes);
-router.use("/news", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), NewsApiRoutes);
-router.use("/contact", checkPermission([PERMISSIONS.ADMIN, PERMISSIONS.SUPERADMIN]), contactApiRoutes);
-router.use("/permission", checkPermission([PERMISSIONS.SUPERADMIN]), PermissionApiRoutes);
-router.use("/role", checkPermission([PERMISSIONS.SUPERADMIN]), RoleApiRoutes)
+router.use("/category_sidebar", checkPermission([PERMISSIONS.ADMIN]), CategorySilebarApiRoutes)
+router.use("/category_navbar", checkPermission([PERMISSIONS.ADMIN]), CategoryNavbarApiRoutes); 
+router.use("/category", checkPermission([PERMISSIONS.ADMIN]), CategoryApiRoutes);
+router.use("/subcategory", checkPermission([PERMISSIONS.ADMIN]), SubcategoryApiRoutes);
+router.use("/blog", checkPermission([PERMISSIONS.ADMIN]), AdminApiBlogRoutes);
+router.use("/producer", checkPermission([PERMISSIONS.ADMIN]), ProducerApiRoutes);
+router.use("/product", checkPermission([PERMISSIONS.ADMIN]), ProductApiRoutes);
+router.use("/category_Attribute", checkPermission([PERMISSIONS.ADMIN]), CategoryAttributeApiRoutes);
+router.use("/product_category_attribute", checkPermission([PERMISSIONS.ADMIN]), ProductCatAttributeApiRoutes);
+router.use("/newscategory", checkPermission([PERMISSIONS.ADMIN]), NewsCategoryApiRoutes);
+router.use("/news", checkPermission([PERMISSIONS.ADMIN]), NewsApiRoutes);
+router.use("/contact", checkPermission([PERMISSIONS.ADMIN]), contactApiRoutes);
+router.use("/permission", checkPermission([PERMISSIONS.ADMIN]), PermissionApiRoutes);
+router.use("/role", checkPermission([PERMISSIONS.ADMIN]), RoleApiRoutes)
 
 module.exports = {
     AdminApiRoutes: router

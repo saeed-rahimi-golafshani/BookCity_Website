@@ -11,7 +11,6 @@ const CommentType = new GraphQLObjectType({
         positive_points: {type: new GraphQLList(GraphQLString)},
         comment: {type: GraphQLString},
         show: {type: GraphQLBoolean},
-        openToComment: {type: GraphQLBoolean},
         likes: {type: UserType},
         dislikes: {type: UserType},
         createdAt: {type: GraphQLString},

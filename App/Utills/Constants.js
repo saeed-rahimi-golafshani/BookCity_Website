@@ -19,8 +19,7 @@ module.exports = {
     PERMISSIONS: Object.freeze(
         {
             USER: ["profile"],
-            SUPERADMIN: ["all"],
-            ADMIN: ["blogs", "category", "produt"],
+            ADMIN: ["all"],
             ALL: "all"
         }
     ),

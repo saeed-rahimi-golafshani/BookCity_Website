@@ -1,0 +1,9 @@
+# Comment For Blog
+mutation{
+  CreateCommentForBlog(comment:"salam khobi", 
+    title: "پیشنهاد عالی", 
+    negative_points: ["نکات منفی", "خیلی بد"], positive_points: [""],  blogId:"64a8329e5dfd217d60f0bbb1"){
+    statusCode
+    data
+  }
+}

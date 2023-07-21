@@ -1,10 +1,15 @@
+const createHttpError = require("http-errors");
+const { default: mongoose } = require("mongoose");
+const { BlogModel } = require("../Models/Blog.Model");
+const { NewsModel } = require("../Models/News.Model")
+
 function parseObject(valueNode) {
     const value = Object.create(null);
     valueNode.fields.forEach(field => {
         value[field.name.value] = parseValueNode(field.value)
     })
     return value
-}
+};
 function parseValueNode(valueNode) {
     switch (valueNode.kind) {
         case Kind.STRING:
@@ -20,7 +25,7 @@ function parseValueNode(valueNode) {
         default:
             return null;
     }
-}
+};
 function parseLiteral(valueNode){
     switch(valueNode.kind) {
         case Kind.STRING:
@@ -31,7 +36,7 @@ function parseLiteral(valueNode){
         case Kind.OBJECT: 
                 
     }
-}
+};
 function toObject(value){
     if(typeof value === 'object'){
         return value
@@ -40,9 +45,23 @@ function toObject(value){
         return JSON.parse(value)
     }
     return null
+};
+async function checkExistBlog(blogid){
+    if(!mongoose.isValidObjectId(blogid)) throw new createHttpError.BadRequest("ساختار شناسه وارد شده اشتباه است");
+    const blog = await BlogModel.findById(blogid);
+    if(!blog) throw new createHttpError.NotFound("مقاله ای یافت نشد");
+    return blog;
+};
+async function checkExistNews(newsid){
+    if(!mongoose.isValidObjectId(newsid)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const news = await NewsModel.findById(newsid);
+    if(!news) throw new createHttpError.NotFound("خبر مورد نظر یافت نشد");
+    return news
 }
 
 module.exports = {
     parseLiteral,
-    toObject
+    toObject,
+    checkExistBlog,
+    checkExistNews
 }

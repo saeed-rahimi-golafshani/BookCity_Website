@@ -34,10 +34,18 @@ const AnswerType = new GraphQLObjectType({
         createdAt: {type: GraphQLString}
     }
 });
+const ResponseType = new GraphQLObjectType({
+    name: "ResponseType",
+    fields: {
+        statusCode: {type: GraphQLString},
+        data: {type: AnyType}
+    }
+});
 
 module.exports = {
     UserType,
     AnyType,
     ProducerType,
-    AnswerType
+    AnswerType,
+    ResponseType
 }
