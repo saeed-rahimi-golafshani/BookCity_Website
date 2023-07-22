@@ -1,0 +1,21 @@
+# BookmarksBlog
+mutation{
+	BookmarksOfBlog(blogId:"64a8329e5dfd217d60f0bbb1"){
+    statusCode,
+    data
+  }
+}
+# BookmarksNews
+mutation{
+	BookmarksOfNews(newsId:"64ba296ddaf569c3fba16623"){
+    statusCode,
+    data
+  }
+}
+# BookmarksProducts 
+mutation{
+	BookmarksOfProduct(productId:"648a0ad8bff486e0b8b22e5a"){
+    statusCode,
+    data
+  }
+}
