@@ -1,0 +1,10 @@
+# QuestionsAndAnswersOfProduct
+mutation{
+	QuestionsProduct(productId:"648a0ad8bff486e0b8b22e5a",
+  	comment: "قیمت این محصول 200 هزار تومان است",
+    parent:"64bc249ec5bea72540639e0e"
+  ){
+    statusCode,
+    data
+  }
+}
