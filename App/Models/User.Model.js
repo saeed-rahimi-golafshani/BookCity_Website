@@ -5,7 +5,14 @@ const UserAddress = new mongoose.Schema({
     city: {type: String, required: true},
     addrees: {type: String, required: true},
     postal_code: {type: String, required: true}
-})
+});
+const ProductSchema = new mongoose.Schema({
+    productId: {type: mongoose.Types.ObjectId, ref: "product"},
+    count: {type: Number, default: 1} // اگر یک محصولی تکراری بود آی دی ذخیره نشود
+});
+const BasketSchema = new mongoose.Schema({
+    products: {type: [ProductSchema], default: []}
+});
 const UserSchema = new mongoose.Schema({
     firstname: {type: String},
     lastname: {type: String},
@@ -20,6 +27,7 @@ const UserSchema = new mongoose.Schema({
     address: {type: UserAddress},
     roles: {type: String, default: "USER"},
     Product: {type: [mongoose.Types.ObjectId], default: [], ref: "product"},
+    basket: {type: BasketSchema} 
 }, {
     timestamps: true,
     toJSON: {

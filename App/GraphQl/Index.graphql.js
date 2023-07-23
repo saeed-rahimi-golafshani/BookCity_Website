@@ -11,7 +11,8 @@ const { CreateCommentForBlog, CreateCommentForNews, CreateCommentForProduct } = 
 const { LikeBlog, likeNews, likeProduct, LikeCommentOfBlog, LikeCommentOfNews, LikeCommentOfProduct } = require("./Mutations/Likes.Resolver");
 const { DislikeOfNews, DislikesOfBlog, DislikesOfProduct, DislikesCommentsOfblog, DislikesCommentsOfNews, DislikesCommentsOfProduct } = require("./Mutations/Dislikes.Resolver");
 const { BookmarksOfBlog, BookmarksOfNews, BookmarksOfProduct } = require("./Mutations/Bookmarks.Resolver");
-const { QuestionsProduct } = require("./Mutations/Questions.Resolver")
+const { QuestionsProduct } = require("./Mutations/Questions.Resolver");
+const { createProductToBasket, removeProductFromBasket } = require("./Mutations/Basket.Resolver")
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
@@ -72,7 +73,10 @@ const RootMutation = new GraphQLObjectType({
         BookmarksOfNews,
         BookmarksOfProduct,
         // Questions
-        QuestionsProduct
+        QuestionsProduct,
+        // basket
+        createProductToBasket,
+        removeProductFromBasket
     }
 });
 const GraphQlSchema = new GraphQLSchema({
