@@ -2,7 +2,8 @@ const createHttpError = require("http-errors");
 const { default: mongoose } = require("mongoose");
 const { BlogModel } = require("../Models/Blog.Model");
 const { NewsModel } = require("../Models/News.Model");
-const { ProductModel } = require("../Models/Products.Model")
+const { ProductModel } = require("../Models/Products.Model");
+const { UserModel } = require("../Models/User.Model");
 
 function parseObject(valueNode) {
     const value = Object.create(null);
@@ -83,6 +84,49 @@ async function checkExistCommentOfProduct(commentId){
     if(!comment) throw new createHttpError.NotFound("در این محصول کامنتی یافت نشد");
     return comment
 }
+async function getBasketOfUser(userId){
+    const userDetail = await UserModel.aggregate([
+        {
+            $match: {_id: userId}
+        },
+        {
+            $project: {basket:1}
+        },
+        {
+            $lookup: {
+                from: "products",
+                localField: "basket.products.productId",
+                foreignField: "_id",
+                as: "productDetail"
+            }
+        },
+        {
+            $addFields: {
+                "productDetail": {
+                    $function: {
+                        body: function(productDetail, products) {
+                            return productDetail.map(function(product){
+                                const count = products.find(item => item.productId.valueOf() == product._id.valueOf()).count;
+                                return {
+                                    ...product,
+                                    basketCount: count,
+                                    totalPrice: count * product.price,
+                                    benfit: (product.main_price * product.discount) / 100
+                                }
+                            })
+                        },
+                        args: ["$productDetail", "$basket.products"],
+                        lang: "js"
+                    }
+                }
+            }
+        },
+        {
+            $project: {basket: 0}
+        }
+    ]);
+    return userDetail
+}
 
 module.exports = {
     parseLiteral,
@@ -92,5 +136,6 @@ module.exports = {
     checkExistProduct,
     checkExistCommentOfBlog,
     checkExistCommentOfNews,
-    checkExistCommentOfProduct
+    checkExistCommentOfProduct,
+    getBasketOfUser
 }

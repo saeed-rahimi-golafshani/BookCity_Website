@@ -125,13 +125,14 @@ class ProductController extends Controller{
             const { id } = req.params;
             const product = await this.checkExistProductById(id);
             const dataBody = copyObject(req.body);
+            const price = discountOfPrice(dataBody.main_price, dataBody.discount);
             if(dataBody.fileUploadPath && dataBody.filename){
                 dataBody.images = listOfImagesFromRequest(req?.files?.images, dataBody.fileUploadPath);
                 dataBody.image_refrence = path.join(dataBody.fileUploadPath, dataBody.filename).replace(/\\/g, "/");
             }
             let blockList = Object.values(ProductBlackList);
             deleteInvalidPropertyObject(dataBody, blockList);
-            const updateResault = await ProductModel.updateOne({_id: product._id}, {$set: dataBody});
+            const updateResault = await ProductModel.updateOne({_id: product._id}, {$set: dataBody, price});
             if(!updateResault) throw new createHttpError.InternalServerError("خطای سروری");
             return res.status(httpStatus.OK).json({
                 statusCode: httpStatus.OK,
