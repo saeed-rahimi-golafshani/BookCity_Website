@@ -131,6 +131,26 @@ async function getBasketOfUser(userId){
                         args: ["$productDetail", "$basket.products"],
                         lang: "js"
                     }
+                }, 
+                "payDetail": {
+                    $function: {
+                        body: function(productDetail, products) {
+                            const productAmount =  productDetail.reduce(function(total, product){
+                                const count = products.find(item => item.productId.valueOf() == product._id.valueOf()).count;
+                                const totalPrice = count * product.price;
+                                return total + totalPrice
+                                
+                            }, 0)
+                            const productIds = productDetail.map(product => product._id.valueOf())
+                            return {
+                                productAmount,
+                                paymentAmount: productAmount,
+                                productIds
+                            }
+                        },
+                        args: ["$productDetail", "$basket.products"],
+                        lang: "js"
+                    }
                 }
             }
         },
