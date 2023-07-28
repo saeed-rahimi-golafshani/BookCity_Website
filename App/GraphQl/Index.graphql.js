@@ -13,7 +13,8 @@ const { DislikeOfNews, DislikesOfBlog, DislikesOfProduct, DislikesCommentsOfblog
 const { BookmarksOfBlog, BookmarksOfNews, BookmarksOfProduct } = require("./Mutations/Bookmarks.Resolver");
 const { QuestionsProduct } = require("./Mutations/Questions.Resolver");
 const { createProductToBasket, removeProductFromBasket } = require("./Mutations/Basket.Resolver");
-const { getUserBasket } = require("./Queries/User_Profile.Resolver");
+const { getUserBasket, getUserBookmarksProduct, getUserBookmarksBlog } = require("./Queries/User_Profile.Resolver");
+const { ListOfNews, ListOfNewsById, ListOfNewsByCategory, ListOfCategoryNews, ListOfCategoryNewsById } = require("./Queries/News.Resolver");
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
@@ -47,7 +48,15 @@ const RootQuery = new GraphQLObjectType({
         listOfProductCategoryAttribute: ListOfProductCategoryAttribute,
         listOfProductCategoryAttributeByProId: ListOfProductCategoryAttributeByProId,
         // User_profile 
-        getUserBasket
+        getUserBasket,
+        getUserBookmarksProduct,
+        getUserBookmarksBlog,
+        // News && categoryNews
+        listOfNews: ListOfNews,
+        listOfNewsById: ListOfNewsById,
+        listOfNewsByCategory: ListOfNewsByCategory,
+        listOfCategoryNews: ListOfCategoryNews,
+        listOfCategoryNewsById: ListOfCategoryNewsById
     }
 });
 const RootMutation = new GraphQLObjectType({

@@ -4,6 +4,7 @@ const { BlogModel } = require("../Models/Blog.Model");
 const { NewsModel } = require("../Models/News.Model");
 const { ProductModel } = require("../Models/Products.Model");
 const { UserModel } = require("../Models/User.Model");
+const { NewsCategoryModel } = require("../Models/NewsCategory.Model");
 
 function parseObject(valueNode) {
     const value = Object.create(null);
@@ -59,6 +60,18 @@ async function checkExistNews(newsid){
     const news = await NewsModel.findById(newsid);
     if(!news) throw new createHttpError.NotFound("خبر مورد نظر یافت نشد");
     return news
+};
+async function checkExistNewsByCategoryId(catId){
+    if(!mongoose.isValidObjectId(catId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const news = await NewsModel.find({newscategory: catId})
+    if(!news) throw new createHttpError.NotFound("خبر مورد نظر یافت نشد");
+    return news
+};
+async function checkExistNewsCategoryById(Id){
+    if(!mongoose.isValidObjectId(Id)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
+    const newsCategory = await NewsCategoryModel.findById(id);
+    if(!newsCategory) throw new createHttpError.NotFound("دسته بندی اخبار مورد نظر یافت نشد");
+    return newsCategory
 };
 async function checkExistProduct(proId){
     if(!mongoose.isValidObjectId(proId)) throw new createHttpError.BadRequest("ساختار شناسه مورد نظر اشتباه است");
@@ -133,9 +146,11 @@ module.exports = {
     toObject,
     checkExistBlog,
     checkExistNews,
+    checkExistNewsByCategoryId,
     checkExistProduct,
     checkExistCommentOfBlog,
     checkExistCommentOfNews,
     checkExistCommentOfProduct,
-    getBasketOfUser
+    getBasketOfUser,
+    checkExistNewsCategoryById
 }

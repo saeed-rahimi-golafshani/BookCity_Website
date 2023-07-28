@@ -1,0 +1,74 @@
+# getUserBookmarksProduct
+{
+  getUserBookmarksProduct{
+    _id
+    title
+    image_refrence
+    image_refrenceUrl
+    price
+    category{
+      _id
+      title
+    }
+    subcategory{
+      _id
+    }
+    producer{
+      _id
+      title
+    }
+    comments{
+      _id
+      title
+    }
+    questions{
+      _id
+      answers{
+        _id
+      }
+    }
+    likes{
+      _id
+      firstname
+    }
+    dislikes{
+      _id
+      firstname
+    }
+    bookmarks{
+      _id
+      firstname
+    }
+    
+  }
+}
+# getUserBookmarksBlog
+{
+  getUserBookmarksBlog{
+    _id
+    title
+    image_refrence
+    images
+    category{
+      _id
+      title
+    }
+    comments{
+      _id
+      title
+    }
+    likes{
+      _id
+      firstname
+    }
+    dislikes{
+      _id
+      firstname
+    }
+    bookmarks{
+      _id
+      firstname
+    }
+    
+  }
+}
