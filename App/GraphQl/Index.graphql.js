@@ -13,7 +13,7 @@ const { DislikeOfNews, DislikesOfBlog, DislikesOfProduct, DislikesCommentsOfblog
 const { BookmarksOfBlog, BookmarksOfNews, BookmarksOfProduct } = require("./Mutations/Bookmarks.Resolver");
 const { QuestionsProduct } = require("./Mutations/Questions.Resolver");
 const { createProductToBasket, removeProductFromBasket } = require("./Mutations/Basket.Resolver");
-const { getUserBasket, getUserBookmarksProduct, getUserBookmarksBlog } = require("./Queries/User_Profile.Resolver");
+const { getUserBasket, getUserBookmarksProduct, getUserBookmarksBlog, getUserBookmarksNews } = require("./Queries/User_Profile.Resolver");
 const { ListOfNews, ListOfNewsById, ListOfNewsByCategory, ListOfCategoryNews, ListOfCategoryNewsById } = require("./Queries/News.Resolver");
 
 const RootQuery = new GraphQLObjectType({
@@ -51,6 +51,7 @@ const RootQuery = new GraphQLObjectType({
         getUserBasket,
         getUserBookmarksProduct,
         getUserBookmarksBlog,
+        getUserBookmarksNews,
         // News && categoryNews
         listOfNews: ListOfNews,
         listOfNewsById: ListOfNewsById,

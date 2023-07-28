@@ -6,6 +6,8 @@ const { ProductType } = require("../TypeDefs/Product.Type");
 const { ProductModel } = require("../../Models/Products.Model");
 const { BlogType } = require("../TypeDefs/Blog.Type");
 const { BlogModel } = require("../../Models/Blog.Model");
+const { NewsType } = require("../TypeDefs/News.Type");
+const { NewsModel } = require("../../Models/News.Model");
 
 const getUserBasket = {
     type: AnyType,
@@ -52,10 +54,24 @@ const getUserBookmarksBlog = {
     }
 };
 const getUserBookmarksNews = {
+    type: new GraphQLList(NewsType),
+    resolve: async (_, args, context) => {
+        const { req } = context;
+        const user = await verifyAccessTokenInGraphQL(req);
+        const news = await NewsModel.find({bookmarks: user._id}).populate([
+            {path: "newscategory"},
+            {path: "comment.user"},
+            {path: "likes"},
+            {path: "dislikes"},
+            {path: "bookmarks"}
+        ]);
+        return news
+    }
 }
 
 module.exports = {
     getUserBasket,
     getUserBookmarksProduct,
-    getUserBookmarksBlog
+    getUserBookmarksBlog,
+    getUserBookmarksNews
 }
