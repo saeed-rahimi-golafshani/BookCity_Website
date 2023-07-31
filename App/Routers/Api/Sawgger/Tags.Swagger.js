@@ -3,6 +3,6 @@
  *  tags: 
  *      -   name: HomePage
  *          description: 
- *      -   name: basket_and_Payment
+ *      -   name: Payment
  *          description: Contact section
  */

@@ -5,6 +5,7 @@ const redisCkient = require("../Utills/Init.Redis");
 const { AdminApiRoutes } = require("./Admin/Admin.Routes");
 const { IndexApi } = require("./Api/Home.Routes");
 const { userApiAuthenticationRoutes } = require("./User/Auth.Routes");
+const { PaymentApiRoutes } = require("./Api/Payment");
 const router = require("express").Router();
 (async () =>{
     await redisCkient.set("key", "value");
@@ -16,6 +17,7 @@ router.use("/", IndexApi);
 router.use("/users", userApiAuthenticationRoutes);
 router.use("/admin", verifyAccessToken, AdminApiRoutes);
 router.use("/graphql", graphqlHTTP(graphQlConfig));
+router.use("/homepage", PaymentApiRoutes);
 
 module.exports = {
     AllRoutes: router

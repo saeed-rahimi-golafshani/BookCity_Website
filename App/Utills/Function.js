@@ -2,6 +2,7 @@ const { realpath } = require("fs");
 const createHttpError = require("http-errors");
 const { default: mongoose } = require("mongoose");
 const path = require("path");
+const moment = require("moment-jalali")
 
 function randomNumberFiveDigitsGenerator(){
     return (Math.floor(Math.random() * 90000) + 10000)
@@ -37,12 +38,15 @@ async function checkExistOfModelById(id, modelSchema){
     if(!model) throw new createHttpError.NotFound("گزینه مورد نظر یافت نشد");
     return model
 };
-function deleteFileInPath(fileAddress){
+function deleteFileInPath(fileAddress){ 
     if(fileAddress){
      const pathFile = path.join(__dirname, "..", "..", "Public", fileAddress);
      if(fs.existsSync(pathFile)) fs.unlinkSync(pathFile);
     }
 };
+function invoiceNumberGenerator(){ // سازنده شماره فاکتور
+    return moment().format("jYYYYjMMjDDHHmmssSS") + String(process.hrtime()[1]).padStart(9, 0)
+}
 
 module.exports = {
     randomNumberFiveDigitsGenerator,
@@ -51,5 +55,6 @@ module.exports = {
     deleteInvalidPropertyObject,
     discountOfPrice,
     checkExistOfModelById,
-    deleteFileInPath
+    deleteFileInPath,
+    invoiceNumberGenerator
 }
